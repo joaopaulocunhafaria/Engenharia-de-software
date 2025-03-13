@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
     
-    @GetMapping("/name  ")
+    @GetMapping("/name")
     public String getMethodName() {
         return "Hello World";
+    }
+    
+    @GetMapping("/limitado")
+    public String teste() {
+        return "Acesso limitado";
     }
     
 }
