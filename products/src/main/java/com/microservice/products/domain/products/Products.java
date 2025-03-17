@@ -35,11 +35,9 @@ public class Products {
     private Long price;
  
     public Products(ProductDTO productDto){
-        Categories category = service.findById(productDto.categoryId()).get();
         this.title = productDto.title();
         this.description = productDto.description();
         this.image = productDto.image();
-        this.category = category;
         this.ownerId = productDto.ownerId();
         this.price = productDto.price();
     }
