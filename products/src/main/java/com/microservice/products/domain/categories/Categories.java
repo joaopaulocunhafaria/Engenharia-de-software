@@ -21,12 +21,9 @@ public class Categories {
         private String title;
         private String description;
          
-        public Categories fromDTO(CategoriesDTO categoriesDto){
-            Categories obj = new Categories();
-            obj.setTitle(categoriesDto.title());
-            obj.setDescription(categoriesDto.description());
-             
-            return obj;
-        }
+        public Categories(CategoriesDTO categoriesDto){
+            this.title = categoriesDto.title();
+            this.description = categoriesDto.description();
+        } 
 
 }
