@@ -69,7 +69,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/validate/{token}")
-    public ResponseEntity<?> validateToken(@PathVariable String  token) {
+    public ResponseEntity<String> validateToken(@PathVariable String  token) {
         try {
             
             String email = tokenService.validateToken(token);
@@ -80,7 +80,7 @@ public class AuthenticationController {
                 return ResponseEntity.status(401).body("Usuário não encontrado");
             }
             
-            return ResponseEntity.ok(usr);
+            return ResponseEntity.ok(usr.getEmail());
         } catch (JWTVerificationException e) {
             logger.warn("Tentativa de validação com token inválido: {}", token);
             return ResponseEntity.status(401).body("Token inválido ou expirado");
