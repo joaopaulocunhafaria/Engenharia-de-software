@@ -42,14 +42,14 @@ public class CategoriesController {
             usersProxy.validateToken(req.token());
 
             List<Categories> categories = categoriesService.findAll();
-            
+
             return ResponseEntity.ok().body(categories);
 
         } catch (FeignException e) {
             return ResponseEntity.badRequest().body("Token inválido");
-        }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error returnig category: " + e.getMessage());
-        } 
+        }
     }
 
     @GetMapping("/{id}")
@@ -63,9 +63,9 @@ public class CategoriesController {
             return ResponseEntity.ok(cat);
         } catch (FeignException e) {
             return ResponseEntity.badRequest().body("Token inválido");
-        }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error finding category: " + e.getMessage());
-        } 
+        }
     }
 
     @PostMapping
@@ -82,7 +82,27 @@ public class CategoriesController {
         } catch (FeignException e) {
             return ResponseEntity.badRequest().body("Token inválido");
         }
- 
+
+    }
+
+    @PostMapping("/list/{token}")
+    public ResponseEntity<?> saveList(@RequestBody List<CategoriesDTO> categories, @PathVariable String token) {
+
+        try {
+            usersProxy.validateToken(token);
+            for (CategoriesDTO categoriesDTO : categories) {
+
+
+                Categories categoryObj = new Categories(categoriesDTO);
+
+                categoriesService.save(categoryObj);
+
+            }
+            return ResponseEntity.ok().body(categories);
+        } catch (FeignException e) {
+            return ResponseEntity.badRequest().body("Token inválido");
+        }
+
     }
 
     @DeleteMapping("/{id}")
@@ -94,11 +114,10 @@ public class CategoriesController {
 
             return ResponseEntity.ok().body("Category deleted successfully.");
 
-        }catch (FeignException e) {
+        } catch (FeignException e) {
             return ResponseEntity.badRequest().body("Token inválido");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error deleting category: " + e.getMessage());
-        } 
+        }
     }
 }

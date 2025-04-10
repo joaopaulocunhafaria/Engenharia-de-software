@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping; 
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microservice.products.domain.Dto.AuthenticationDTO;
@@ -21,7 +21,7 @@ import com.microservice.products.proxy.UsersProxy;
 import com.microservice.products.services.CategoriesService;
 import com.microservice.products.services.ProductsService;
 
-import feign.FeignException; 
+import feign.FeignException;
 
 @RestController()
 @RequestMapping("products")
@@ -49,7 +49,7 @@ public class ProductsController {
             return ResponseEntity.badRequest().body("Token inválido");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error returnig products: " + e.getMessage());
-        } 
+        }
     }
 
     @GetMapping("/{id}")
@@ -65,22 +65,25 @@ public class ProductsController {
             return ResponseEntity.badRequest().body("Token inválido");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error finding product by id: " + e.getMessage());
-        } 
+        }
     }
 
-    @PostMapping
-    public ResponseEntity<?> save(@RequestBody ProductDTO product) {
+    @PostMapping("/list/{token}")
+    public ResponseEntity<?> saveList(@RequestBody List<ProductDTO> products, @PathVariable String token) {
         try {
-            usersProxy.validateToken(product.token());
-            
-            Products products = new Products(product);
-            Optional<Categories> category = categoriesService.findById(product.categoryId());
 
-            if (category.isPresent()) {
-                products.setCategory(category.get());
+            usersProxy.validateToken(token);
+            for (ProductDTO product : products) {
+
+                Products productObj = new Products(product);
+                Optional<Categories> category = categoriesService.findById(product.categoryId());
+
+                if (category.isPresent()) {
+                    productObj.setCategory(category.get());
+                }
+
+                productsService.save(productObj);
             }
-
-            productsService.save(products);
 
             return ResponseEntity.ok().body(products);
 
@@ -88,14 +91,14 @@ public class ProductsController {
             return ResponseEntity.badRequest().body("Token inválido");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error saving product: " + e.getMessage());
-        } 
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@RequestBody AuthenticationDTO req, @PathVariable String id) throws Exception {
-          try {
+        try {
             usersProxy.validateToken(req.token());
-            
+
             productsService.deleteById(id);
 
             return ResponseEntity.ok().body("Product deleted successfully.");
@@ -104,6 +107,6 @@ public class ProductsController {
             return ResponseEntity.badRequest().body("Token inválido");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error deleting product: " + e.getMessage());
-        } 
+        }
     }
 }
