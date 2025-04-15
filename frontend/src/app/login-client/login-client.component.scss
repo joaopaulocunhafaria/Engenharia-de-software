@@ -1,0 +1,36 @@
+/* Estilos adicionais podem ser adicionados aqui */
+.card {
+    border-radius: 10px;
+  }
+  
+  .btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0b5ed7;
+  }
+  
+  .form-control {
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .invalid-feedback {
+    display: block;
+  }
+  
+  /* Estilo para o botão de mostrar/ocultar senha */
+  .input-group button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  /* Corrige a altura do input group */
+  .input-group .form-control, 
+  .input-group .btn {
+    height: 45px;
+  }
