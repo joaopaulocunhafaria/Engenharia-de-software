@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-client',
@@ -13,7 +15,11 @@ export class LoginClientComponent implements OnInit {
   error = '';
   showPassword = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -28,16 +34,24 @@ export class LoginClientComponent implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
 
     if (this.loginForm.invalid) {
+      this.error = 'Por favor, preencha todos os campos corretamente.';
       return;
     }
 
     this.loading = true;
     this.error = '';
-    
+
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (response: any) => {
+        localStorage.setItem('token', response.token);
+
+        this.router.navigate(['/home']);
+      },
+    });
     // Simulando chamada de API
     setTimeout(() => {
       // Aqui você faria a chamada real para seu serviço de autenticação
@@ -52,4 +66,5 @@ export class LoginClientComponent implements OnInit {
       this.loading = false;
     }, 1500);
   }
+}
 }
