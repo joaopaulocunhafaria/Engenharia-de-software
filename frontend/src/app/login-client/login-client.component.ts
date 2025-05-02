@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/auth/auth.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginClientComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    private userService: UserService,
     private router: Router
     ) { }
 
@@ -44,7 +44,7 @@ export class LoginClientComponent implements OnInit {
     this.loading = true;
     this.error = '';
   
-    this.authService.login(this.loginForm.value).subscribe({
+    this.userService.login(this.loginForm.value).subscribe({
       next: (response: any) => {
         localStorage.setItem('token', response.token);
         this.router.navigate(['/home']);

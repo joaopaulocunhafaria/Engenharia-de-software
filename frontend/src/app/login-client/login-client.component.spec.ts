@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { LoginClientComponent } from './login-client.component';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/services/user/user.service';
 
 describe('LoginClientComponent', () => {
   let component: LoginClientComponent;
