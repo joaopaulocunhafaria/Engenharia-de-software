@@ -1,6 +1,7 @@
 package com.microservice.users.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +45,7 @@ public class UserController {
             String encodedPassword = encoder.encode(userDto.password());
             User user = new User(userDto.name(), userDto.email(), encodedPassword, userDto.role());
             User savedUser = userService.insert(user);
-            return ResponseEntity.ok("User created successfully with ID: " + savedUser.getName());
+            return ResponseEntity.ok().body(Map.of("message", "User created successfully with ID: " + savedUser.getName()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error creating user: " + e.getMessage());
         }
