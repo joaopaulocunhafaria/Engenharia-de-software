@@ -26,45 +26,35 @@ export class LoginClientComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
-  }
+  } 
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
   get f() { return this.loginForm.controls; }
-
   onSubmit(): void {
     this.submitted = true;
-
+  
     if (this.loginForm.invalid) {
       this.error = 'Por favor, preencha todos os campos corretamente.';
       return;
     }
-
+  
     this.loading = true;
     this.error = '';
-
+  
     this.authService.login(this.loginForm.value).subscribe({
       next: (response: any) => {
         localStorage.setItem('token', response.token);
-
         this.router.navigate(['/home']);
       },
+      error: (err: any) => {
+        console.error('Erro ao fazer login:', err.message);
+        this.error = err.message || 'Erro ao fazer login.';
+        this.loading = false;
+      }
     });
-    // Simulando chamada de API
-    setTimeout(() => {
-      // Aqui você faria a chamada real para seu serviço de autenticação
-      console.log('Login attempt with:', this.loginForm.value);
-      
-      // Simulando erro (remova isso na implementação real)
-      // this.error = 'Email ou senha incorretos';
-      // this.loading = false;
-      
-      // Simulando sucesso (implemente a navegação adequada)
-      alert('Login bem-sucedido!');
-      this.loading = false;
-    }, 1500);
   }
-}
+  
 }
