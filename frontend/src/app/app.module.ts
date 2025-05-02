@@ -7,6 +7,7 @@ import { LoginClientComponent } from './login-client/login-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './home/home.component';
+import {  HttpClientModule } from '@angular/common/http';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 
 @NgModule({
@@ -19,9 +20,10 @@ import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

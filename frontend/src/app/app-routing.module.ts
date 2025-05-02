@@ -8,11 +8,13 @@ const routes: Routes = [
   {path:"", redirectTo:"client", pathMatch:"full"},
   {path:"client", component: LoginClientComponent},
   {path:"home", component: HomeComponent},
+  {path:"**", redirectTo:""},
+  {path:"home", component: HomeComponent},
   {path:"cadastro", component: CadastroUsuarioComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{enableTracing: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
