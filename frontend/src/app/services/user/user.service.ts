@@ -2,21 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { LoginClientComponent } from '../login-client/login-client.component';
+import { LoginClientComponent } from '../../login-client/login-client.component';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class AuthService{
+export class UserService {
   
-  private readonly apiUrl = 'http://localhost:8081/auth/login';
+  private readonly apiUrl = 'http://localhost:8081';
 
   constructor(private http: HttpClient){}
 
     login(credentials: {email: string; password: string}) : Observable<{ token: string}>{
       console.log('Credenciais:', credentials);
-      return this.http.post<{ token: string} > (this.apiUrl, credentials).pipe(
+      return this.http.post<{ token: string} > (this.apiUrl+"/auth/login", credentials).pipe(
         
         map(response => {
           if(response.token){
@@ -24,9 +24,23 @@ export class AuthService{
           }
           return response;
         }),
-        catchError(this.handleError)
+        catchError(this.handleErrorlogin)
       );
     }
+
+    createUser(user: { name: string; email: string; password: string }): Observable<any> {
+      const token = this.getToken();
+      const headers = { Authorization: `Bearer ${token}` };
+
+      return this.http.post<any>(this.apiUrl+'/users', user, { headers }).pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(this.handleErrorlogin)
+      );
+    }
+
+
   
     logout():void {
       localStorage.removeItem('token');
@@ -40,7 +54,7 @@ export class AuthService{
       return localStorage.getItem('token');
     }
 
-    private handleError(error: HttpErrorResponse) {
+    private handleErrorlogin(error: HttpErrorResponse) {
       let errorMessage = 'Ocorreu um erro inesperado. Tente novamente mais tarde.';
     
       if (error.error instanceof ErrorEvent) {
