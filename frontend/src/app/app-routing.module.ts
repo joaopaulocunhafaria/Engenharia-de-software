@@ -5,12 +5,12 @@ import { HomeComponent } from './home/home.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 
 const routes: Routes = [
-  {path:"", redirectTo:"client", pathMatch:"full"},
-  {path:"client", component: LoginClientComponent},
+  {path:"", redirectTo:"login", pathMatch:"full"},
+  {path:"login", component: LoginClientComponent},
+  {path:"cadastro", component: CadastroUsuarioComponent},
   {path:"home", component: HomeComponent},
   {path:"**", redirectTo:""},
   {path:"home", component: HomeComponent},
-  {path:"cadastro", component: CadastroUsuarioComponent}
 ];
 
 @NgModule({

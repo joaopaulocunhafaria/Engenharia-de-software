@@ -22,8 +22,8 @@ import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.co
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule,
-    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
