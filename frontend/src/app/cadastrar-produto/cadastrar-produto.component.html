@@ -1,0 +1,72 @@
+<div class="header">
+  <img src="assets/logo.png" alt="CEFET MARKET" class="logo">
+</div>
+
+<div class="title">
+  Cadastro de Produto
+</div>
+
+<div class="container">
+  <form [formGroup]="form" class="form-produto">
+    <div class="campo" [ngClass]="{'erro': form.get('nome')?.invalid && form.get('nome')?.touched}">
+      <label for="nome">Nome do produto</label>
+      <input id="nome" formControlName="nome">
+      <small *ngIf="form.get('nome')?.hasError('required') && form.get('nome')?.touched">
+        Nome é obrigatório.
+      </small>
+    </div>
+
+    <div class="campo" [ngClass]="{'erro': form.get('descricao')?.invalid && form.get('descricao')?.touched}">
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" formControlName="descricao"></textarea>
+      <small *ngIf="form.get('descricao')?.hasError('required') && form.get('descricao')?.touched">
+        Descrição é obrigatória.
+      </small>
+    </div>
+
+    <div class="linha">
+      <div class="campo" [ngClass]="{'erro': form.get('preco')?.invalid && form.get('preco')?.touched}">
+        <label for="preco">Preço</label>
+        <input type="number" id="preco" formControlName="preco">
+        <small *ngIf="form.get('preco')?.hasError('required') && form.get('preco')?.touched">
+          Preço é obrigatório.
+        </small>
+        <small *ngIf="form.get('preco')?.hasError('min') && form.get('preco')?.touched">
+          Preço deve ser maior que zero.
+        </small>
+      </div>
+
+      <div class="campo" [ngClass]="{'erro': form.get('estoque')?.invalid && form.get('estoque')?.touched}">
+        <label for="estoque">Estoque</label>
+        <input type="number" id="estoque" formControlName="estoque">
+        <small *ngIf="form.get('estoque')?.hasError('required') && form.get('estoque')?.touched">
+          Estoque é obrigatório.
+        </small>
+        <small *ngIf="form.get('estoque')?.hasError('min') && form.get('estoque')?.touched">
+          Estoque deve ser no mínimo 1.
+        </small>
+      </div>
+
+      <div class="campo" [ngClass]="{'erro': form.get('categoria')?.invalid && form.get('categoria')?.touched}">
+        <label for="categoria">Categoria</label>
+        <select id="categoria" formControlName="categoria">
+          <option value="" disabled>Selecione uma categoria</option>
+          <option value="livro">Livro</option>
+          <option value="eletronicos">Eletrônicos</option>
+          <option value="material escolar">Material Escolar</option>
+          <option value="item de laboratório">Item de laboratório</option>
+        </select>
+        <small *ngIf="form.get('categoria')?.hasError('required') && form.get('categoria')?.touched">
+          Categoria é obrigatória.
+        </small>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="imagem">Imagem</label>
+      <input type="file" id="imagem" (change)="onFileSelected($event)">
+    </div>
+
+    <button type="button" (click)="cadastrar()">Cadastrar</button>
+  </form>
+</div>

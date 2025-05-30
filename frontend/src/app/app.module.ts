@@ -9,6 +9,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './home/home.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
+import { CadastrarProdutoComponent } from './cadastrar-produto/cadastrar-produto.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.co
     LoginClientComponent,
     LayoutComponent,
     HomeComponent,
-    CadastroUsuarioComponent
+    CadastroUsuarioComponent,
+    CadastrarProdutoComponent
   ],
   imports: [
     BrowserModule,
