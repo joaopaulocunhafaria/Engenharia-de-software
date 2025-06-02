@@ -1,0 +1,110 @@
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+  }
+  
+  .title {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 50px;
+    font-weight: bold;
+  }
+
+  /* Container principal */
+  .container {
+    max-width: 700px;
+    margin: 20px auto;
+    border: 2px solid #264699;
+    border-radius: 10px;
+    padding: 50px;
+    background-color: #D9D9D9;
+  }
+  
+  /* Cabeçalho */
+  .header {
+    background-color: #264699;
+    padding: 5px;
+    color: white;
+    text-align: left;
+  }
+  
+  .logo {
+    width: 200px;
+    margin-right: 1px;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+  }
+  
+  /* Formulário */
+  .form-produto {
+    margin-top: 20px;
+  }
+  
+  .campo {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .campo label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .campo input,
+  .campo textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .campo input[type="file"] {
+    padding: 5px;
+  }
+
+  .campo input[type="number"] {
+    width: 178px;
+  }
+  
+  /* Linha com múltiplos campos */
+  .linha {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .erro input, .erro textarea, .erro select {
+    border-color: red;
+  }
+  
+  small {
+    color: red;
+    font-size: 15px;
+  }
+
+  /* Botão */
+  button {
+    width: 100%;
+    padding: 15px;
+    background-color: #264699;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #264699;
+  }
+  
