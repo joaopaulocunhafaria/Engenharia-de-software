@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #264699;
+  padding: 10px 20px;
+  color: white;
+  height: 60px; /* Altura fixada */
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.titulo {
+  font-size: 20px;
+  font-weight: bold;
+}

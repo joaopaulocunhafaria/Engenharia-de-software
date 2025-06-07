@@ -1,3 +1,8 @@
-<app-layout title="Marketplace">
-    <h1>Meu component</h1>
-</app-layout>
+<nav class="navbar">
+  <span class="logo">Marketplace</span>
+  <form (submit)="buscar()">
+    <input [(ngModel)]="termo" name="termo" placeholder="Buscar produtos..." />
+  </form>
+</nav>
+
+<router-outlet></router-outlet>

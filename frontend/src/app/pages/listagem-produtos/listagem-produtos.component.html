@@ -1,0 +1,31 @@
+<div class="header">
+  <img src="assets/logo.png" alt="CEFET MARKET" class="logo">
+</div>
+
+<div class="search-bar">
+  <input type="text" placeholder="Buscar produto..." [(ngModel)]="termoBusca" (input)="buscarProdutos()">
+</div>
+
+<div class="title">
+  <ng-container *ngIf="termoBusca; else todosProdutos">
+    Resultados para "{{ termoBusca }}"
+  </ng-container>
+  <ng-template #todosProdutos>Todos os Produtos</ng-template>
+</div>
+
+<div class="container">
+  <div *ngIf="carregando" class="loading">🔄 Carregando produtos...</div>
+
+  <div *ngIf="!carregando && produtos.length === 0" class="empty">
+    ❌ Nenhum produto encontrado.
+  </div>
+
+  <div class="produtos" *ngIf="!carregando && produtos.length > 0">
+    <div class="card" *ngFor="let produto of produtos">
+      <img [src]="produto.imagem" alt="Imagem do produto" />
+      <h3>{{ produto.nome }}</h3>
+      <p>{{ produto.descricao }}</p>
+      <strong>R$ {{ produto.preco }}</strong>
+    </div>
+  </div>
+</div>
