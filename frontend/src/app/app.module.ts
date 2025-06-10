@@ -10,6 +10,9 @@ import { HomeComponent } from './home/home.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import { CadastrarProdutoComponent } from './cadastrar-produto/cadastrar-produto.component';
+import { ListagemProdutosComponent } from './pages/listagem-produtos/listagem-produtos.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { DetalheProdutoComponent } from './detalhe-produto/detalhe-produto.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { CadastrarProdutoComponent } from './cadastrar-produto/cadastrar-produto
     LayoutComponent,
     HomeComponent,
     CadastroUsuarioComponent,
-    CadastrarProdutoComponent
+    CadastrarProdutoComponent,
+    ListagemProdutosComponent,
+    NavbarComponent,
+    DetalheProdutoComponent
   ],
   imports: [
     BrowserModule,
