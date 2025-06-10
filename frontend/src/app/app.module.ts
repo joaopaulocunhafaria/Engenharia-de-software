@@ -12,6 +12,7 @@ import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.co
 import { CadastrarProdutoComponent } from './cadastrar-produto/cadastrar-produto.component';
 import { ListagemProdutosComponent } from './pages/listagem-produtos/listagem-produtos.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DetalheProdutoComponent } from './detalhe-produto/detalhe-produto.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     CadastroUsuarioComponent,
     CadastrarProdutoComponent,
     ListagemProdutosComponent,
-    NavbarComponent
+    NavbarComponent,
+    DetalheProdutoComponent
   ],
   imports: [
     BrowserModule,
