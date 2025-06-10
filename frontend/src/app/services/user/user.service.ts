@@ -3,20 +3,19 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { LoginClientComponent } from '../../login-client/login-client.component';
-
+import { userApi } from 'src/app/Domain/HttpUrls/UserUrl';
 @Injectable({
   providedIn: 'root'
 })
 
 export class UserService {
-  
-  private readonly apiUrl = 'http://localhost:8081';
+   
 
   constructor(private http: HttpClient){}
 
     login(credentials: {email: string; password: string}) : Observable<{ token: string}>{
       console.log('Credenciais:', credentials);
-      return this.http.post<{ token: string} > (this.apiUrl+"/auth/login", credentials).pipe(
+      return this.http.post<{ token: string} > (userApi+"/auth/login", credentials).pipe(
         
         map(response => {
           if(response.token){
@@ -32,7 +31,7 @@ export class UserService {
       const token = this.getToken();
       const headers = { Authorization: `Bearer ${token}` };
 
-      return this.http.post<any>(this.apiUrl+'/users', user, { headers }).pipe(
+      return this.http.post<any>(userApi+'/users', user, { headers }).pipe(
         map(response => {
           return response;
         }),

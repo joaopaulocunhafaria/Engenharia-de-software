@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProdutoService } from '../services/produto.service';
+import { ProdutoService } from '../services/produtos/produto.service';
+import { Produto } from '../Domain/Models/Product.Model';
 
 @Component({
   selector: 'app-cadastrar-produto',
   templateUrl: './cadastrar-produto.component.html',
   styleUrls: ['./cadastrar-produto.component.scss']
 })
+
+
+
 export class CadastrarProdutoComponent implements OnInit {
   form!: FormGroup; // substitui o objeto produto
   imagemSelecionada: File | null = null;
-
   constructor(
     private fb: FormBuilder,
     private produtoService: ProdutoService
@@ -36,22 +39,29 @@ export class CadastrarProdutoComponent implements OnInit {
 
   cadastrar() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched(); // força exibir os erros
-      alert('Por favor, preencha todos os campos corretamente.');
+      this.form.markAllAsTouched(); // força exibir os erros 
       return;
     }
 
     const produto = this.form.value;
 
-    this.produtoService.createMock(produto, this.imagemSelecionada ?? undefined).subscribe({
-      next: (res) => {
-        alert(res.message); // mensagem de sucesso
-        this.form.reset(); // limpa formulário
-        this.imagemSelecionada = null;
+    const produtoPayload:Produto = {
+      token: 'some-token', 
+      title: produto.nome,
+      description: produto.descricao,
+      image: this.imagemSelecionada ? this.imagemSelecionada.name : '',
+      ownerId: 'some-owner-id',
+      categoryId: produto.categoria,
+      price: produto.preco
+    };
+    
+    this.produtoService.createProduto(produtoPayload).subscribe({
+      next: (response) => {
+        console.log('Produto cadastrado com sucesso:', response); 
       },
-      error: () => {
-        alert('Erro ao cadastrar produto.');
-      }
+      error: (error) => {
+        console.error('Erro ao cadastrar produto:', error); 
+      } 
     });
   }
 }

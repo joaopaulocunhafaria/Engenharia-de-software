@@ -7,5 +7,5 @@ public record ProductDTO(
         String image,
         String ownerId,
         String categoryId,
-        Long price) {
+        String price) {
 }

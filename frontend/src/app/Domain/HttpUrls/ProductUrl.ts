@@ -1,0 +1,1 @@
+export const productApi:String = 'http://localhost:8080'; 

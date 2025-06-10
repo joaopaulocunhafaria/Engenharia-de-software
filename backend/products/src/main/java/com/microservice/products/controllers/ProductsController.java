@@ -94,6 +94,32 @@ public class ProductsController {
         }
     }
 
+    @PostMapping("/{token}")
+    public ResponseEntity<?> save(@RequestBody ProductDTO product, @PathVariable String token) {
+        try {
+
+            System.out.println("Saving product: " + product);
+            usersProxy.validateToken(token);
+
+            Products productObj = new Products(product);
+            Optional<Categories> category = categoriesService.findById(product.categoryId());
+
+            if (category.isPresent()) {
+                productObj.setCategory(category.get());
+            }
+
+            productsService.save(productObj);
+
+            return ResponseEntity.ok().body(product);
+
+        } catch (FeignException e) {
+            System.out.println("Error: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Token inválido");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error saving product: " + e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@RequestBody AuthenticationDTO req, @PathVariable String id) throws Exception {
         try {

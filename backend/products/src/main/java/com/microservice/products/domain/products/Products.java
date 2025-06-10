@@ -39,7 +39,7 @@ public class Products {
         this.description = productDto.description();
         this.image = productDto.image();
         this.ownerId = productDto.ownerId();
-        this.price = productDto.price();
+        this.price = Long.valueOf(productDto.price());
     }
  
 
