@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'login', component: LoginClientComponent },
   { path: 'cadastro', component: CadastroUsuarioComponent },
   { path: 'cadastrar-produto', component: CadastrarProdutoComponent },
-  { path: 'home', component: ListagemProdutosComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'produtos/:termoBusca', component: ListagemProdutosComponent },
   { path: '**', redirectTo: 'home' }
 ];

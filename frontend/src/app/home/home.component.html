@@ -70,10 +70,10 @@
     
     <div class="produtos" >
       <div class="card" *ngFor="let p of products">
-        <img [src]="p.imagePath" alt="Imagem do produto" />
-        <h3>{{ p.name }}</h3>
-        <p>{{ p.descricao }}</p>
-        <strong>R$ {{ p.preco }}</strong>
+        <img [src]="p.image" alt="Imagem do produto" />
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.description }}</p>
+        <strong>R$ {{ p.price }}</strong>
       </div>
     </div>
  

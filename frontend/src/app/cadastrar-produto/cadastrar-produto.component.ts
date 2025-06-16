@@ -46,12 +46,13 @@ export class CadastrarProdutoComponent implements OnInit {
     const produto = this.form.value;
 
     const produtoPayload:Produto = {
+      id: 0, 
       token: 'some-token', 
       title: produto.nome,
       description: produto.descricao,
       image: this.imagemSelecionada ? this.imagemSelecionada.name : '',
       ownerId: 'some-owner-id',
-      categoryId: produto.categoria,
+      category: produto.categoria,
       price: produto.preco
     };
     
