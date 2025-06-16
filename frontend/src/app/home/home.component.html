@@ -68,16 +68,14 @@
   <main class="main-content">
     <h1 class="products-title">Produtos</h1>
     
-    <div class="products-grid">
-      <!-- Product Card Component - Repeat for each product -->
-      <div class="product-card" *ngFor="let product of products">
-        <div class="product-image">
-          <span class="placeholder-text">foto_produto</span>
-        </div>
-        <div class="product-name">
-          <span>nome_produto</span>
-        </div>
+    <div class="produtos" >
+      <div class="card" *ngFor="let p of products">
+        <img [src]="p.imagePath" alt="Imagem do produto" />
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.descricao }}</p>
+        <strong>R$ {{ p.preco }}</strong>
       </div>
     </div>
+ 
   </main>
 </div>
