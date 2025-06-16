@@ -1,10 +1,11 @@
 
 export interface Produto {
-  token: string;
+  id:number,
   title: string;
   description: string;
   image: string;
-  ownerId: string;
-  categoryId: string;
+  token: string;
   price: number;
-}
+  ownerId: string;
+  category: string;
+} 
