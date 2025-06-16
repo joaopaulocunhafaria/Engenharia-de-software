@@ -1,8 +1,81 @@
-<nav class="navbar">
-  <span class="logo">Marketplace</span>
-  <form (submit)="buscar()">
-    <input [(ngModel)]="termo" name="termo" placeholder="Buscar produtos..." />
-  </form>
-</nav>
+<!-- home.component.html -->
+<div class="home-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <!-- User Info -->
+      <div class="user-info">
+        <i class="fas fa-user-circle"></i>
+        <span class="username">nome_usuário</span>
+      </div>
 
-<router-outlet></router-outlet>
+      <!-- Logo -->
+      <div class="logo">
+        <img src="assets/logo.png" alt="CEFET MARKET Logo" class="logo-image">
+      </div>
+
+      <!-- Cart -->
+      <div class="cart" (click)="navigateToCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-text">Carrinho</span>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-section">
+      <!-- Categories -->
+      <div class="categories" (click)="toggleCategories()">
+        <i class="fas fa-bars"></i>
+        <span>Todas as categorias</span>
+        <i class="fas fa-chevron-down dropdown-icon" [class.rotate]="showCategories"></i>
+        
+        <!-- Dropdown Menu -->
+        <div class="categories-dropdown" [class.show]="showCategories">
+          <a href="#" class="category-item" (click)="selectCategory('all', $event)">
+            <i class="fas fa-th"></i>
+            Todas as categorias
+          </a>
+          <a href="#" class="category-item" (click)="selectCategory('livros', $event)">
+            <i class="fas fa-book"></i>
+            Livros
+          </a>
+          <a href="#" class="category-item" (click)="selectCategory('notebook', $event)">
+            <i class="fas fa-laptop"></i>
+            Notebook
+          </a>
+          <a href="#" class="category-item" (click)="selectCategory('cama-banho', $event)">
+            <i class="fas fa-bed"></i>
+            Cama e banho
+          </a>
+          <a href="#" class="category-item" (click)="selectCategory('mobilia', $event)">
+            <i class="fas fa-couch"></i>
+            Mobília
+          </a>
+        </div>
+      </div>
+
+      <!-- Search Input -->
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Buscar produtos, marcas, entre outros..." 
+               #searchInput
+               (keyup.enter)="searchProducts(searchInput.value)">
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <h1 class="products-title">Produtos</h1>
+    
+    <div class="produtos" >
+      <div class="card" *ngFor="let p of products">
+        <img [src]="p.imagePath" alt="Imagem do produto" />
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.descricao }}</p>
+        <strong>R$ {{ p.preco }}</strong>
+      </div>
+    </div>
+ 
+  </main>
+</div>
