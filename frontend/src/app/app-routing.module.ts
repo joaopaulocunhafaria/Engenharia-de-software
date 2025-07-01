@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import { CadastrarProdutoComponent } from './cadastrar-produto/cadastrar-produto.component';
 import { ListagemProdutosComponent } from './pages/listagem-produtos/listagem-produtos.component';
+import { DetalheProdutoComponent } from './detalhe-produto/detalhe-produto.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'cadastrar-produto', component: CadastrarProdutoComponent },
   { path: 'home', component: ListagemProdutosComponent },
   { path: 'produtos/:termoBusca', component: ListagemProdutosComponent },
+  { path: 'detalhe-produto/:id', component:  DetalheProdutoComponent},
   { path: '**', redirectTo: 'home' }
 ];
 
