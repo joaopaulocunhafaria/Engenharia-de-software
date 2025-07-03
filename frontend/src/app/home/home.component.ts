@@ -60,6 +60,6 @@ export class HomeComponent implements OnInit {
   }
 
   viewProductDetails(productId: number): void {
-    console.log('Visualizando produto:', productId);
+    this.router.navigate(['/produto', productId]);
   }
 }
