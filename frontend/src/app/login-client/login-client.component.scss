@@ -1,36 +1,233 @@
-/* Estilos adicionais podem ser adicionados aqui */
-.card {
-    border-radius: 10px;
+/* Arquivo: src/app/login-client/login-client.component.scss */
+
+/* Reset básico e fontes */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f4f4f4; /* Cor de fundo suave */
+  color: #000;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente o conteúdo */
+  min-height: 100vh; /* Garante que o container ocupe a altura total da viewport */
+  background-color: #f4f4f4; /* Cor de fundo do Figma */
+}
+
+/* Estilos do Cabeçalho */
+header {
+  background-color: #264699; /* Azul CEFET MARKET */
+  color: white;
+  padding: 20px 0; /* Padding superior/inferior, largura total */
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Centraliza o logo horizontalmente */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil no cabeçalho */
+}
+
+header .logo img{
+  height: 50px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espaço entre o logo e o texto */
+
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
   }
-  
-  .btn-primary {
-    background-color: #0d6efd;
+
+  img {
+    height: 45px; /* Altura do logo, ajustado para ser mais proeminente */
+  }
+}
+
+/* Estilos da Caixa de Login (o formulário em si) */
+.login-box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada */
+  width: 400px; /* Largura fixa do formulário, ajuste conforme necessário */
+  margin-top: 60px; /* Espaço do topo do header */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Garante que os filhos (inputs, botões) ocupem a largura total */
+}
+
+.login-box h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 25px; /* Aumenta o espaço entre os grupos de formulário */
+  position: relative; /* Para posicionar o ícone e o botão de toggle da senha */
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc; /* Linha de fundo para os inputs */
+  padding-bottom: 8px; /* Espaço entre o input e a linha */
+  transition: border-bottom-color 0.3s ease; /* Transição para foco */
+
+  &:focus-within {
+    border-bottom-color: #264699; /* Cor da linha ao focar */
+  }
+
+  i {
+    color: #777;
+    margin-right: 10px; /* Espaço entre o ícone e o texto do input */
+    font-size: 18px; /* Tamanho do ícone */
+  }
+
+  input {
+    flex-grow: 1; /* Faz o input ocupar o espaço restante */
     border: none;
-    padding: 10px;
-    border-radius: 5px;
+    outline: none; /* Remove a borda de foco padrão do navegador */
+    padding: 5px 0; /* Padding interno para o input */
+    font-size: 16px;
+    color: #333; /* Cor do texto digitado */
+
+    &::placeholder {
+      color: #999; /* Cor do placeholder */
+    }
   }
-  
-  .btn-primary:hover {
-    background-color: #0b5ed7;
+
+  .password-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #777;
+    font-size: 18px;
+    padding: 0 5px; /* Espaço para o ícone de toggle */
+    outline: none;
   }
-  
-  .form-control {
-    padding: 10px;
-    border-radius: 5px;
+}
+
+
+/* Estilos para mensagens de erro de validação (do Angular Forms) */
+.invalid-feedback {
+  color: #dc3545; /* Vermelho para erros */
+  font-size: 0.85em;
+  margin-top: 5px;
+  display: block; /* Garante que a mensagem de erro apareça abaixo do input */
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Estilos dos Botões */
+.btn-primary {
+  background-color: #264699; /* Azul CEFET MARKET */
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Ocupa a largura total */
+
+  &:hover {
+    background-color: darken(#264699, 10%);
   }
-  
-  .invalid-feedback {
-    display: block;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
-  
-  /* Estilo para o botão de mostrar/ocultar senha */
-  .input-group button {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+}
+
+.spinner-border {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  vertical-align: -0.125em;
+  border: 0.1em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: .75s linear infinite spinner-border;
+  animation: .75s linear infinite spinner-border;
+}
+
+/* Animação do spinner */
+@-webkit-keyframes spinner-border {
+  to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes spinner-border {
+  to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+/* Separador "OU" */
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 30px 0; /* Espaço antes e depois do separador */
+  color: #777;
+
+  hr {
+    flex-grow: 1; /* Faz as linhas ocuparem o espaço restante */
+    border: none;
+    border-top: 1px solid #ccc;
   }
-  
-  /* Corrige a altura do input group */
-  .input-group .form-control, 
-  .input-group .btn {
-    height: 45px;
+
+  span {
+    padding: 0 15px; /* Espaço ao redor do texto "OU" */
+    font-weight: bold;
+    font-size: 0.9em;
   }
+}
+
+.btn-secondary {
+  background-color: #f8f9fa; /* Fundo branco/claro */
+  color: #264699; /* Texto azul CEFET MARKET */
+  padding: 12px;
+  border: 2px solid #264699; /* Borda azul */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%; /* Ocupa a largura total */
+
+  &:hover {
+    background-color: #e9ecef;
+    color: darken(#264699, 10%);
+  }
+}
+
+/* Esconde labels para screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
