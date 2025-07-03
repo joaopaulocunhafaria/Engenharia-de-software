@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'detalhe', component: DetalheProdutoComponent },
   { path: 'produtos/:termoBusca', component: ListagemProdutosComponent },
+  { path: 'produto/:id', component: DetalheProdutoComponent},
   { path: '**', redirectTo: 'home' }
 ];
 

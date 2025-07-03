@@ -1,0 +1,139 @@
+/* Arquivo: lista-produtos.component.scss */
+
+/* ------------------------------------- */
+/* ESTILOS GLOBAIS / RESET */
+/* ------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #fff;
+    color: #000;
+    margin: 0; /* Remove a margem padrão do body, eliminando a "barra branca" superior/lateral */
+    padding: 0;
+}
+
+/* ------------------------------------- */
+/* CABEÇALHO (HEADER) */
+/* ------------------------------------- */
+header {
+    background: #264699; /* Azul do CEFET MARKET */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Padding interno para o conteúdo do header */
+    width: 100%; /* Garante que o header ocupe toda a largura */
+    margin-bottom: 40px; /* Espaço abaixo do cabeçalho */
+}
+
+header .logo img{
+    height: 50px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre a imagem do logo e o texto "CEFET MARKET" */
+}
+
+.logo img {
+    height: 30px; /* Ajuste a altura do logo conforme necessário */
+}
+
+.logo h1 {
+    font-size: 1.2em; /* Tamanho da fonte para "CEFET MARKET" */
+    line-height: 1; /* Ajuda no alinhamento vertical com a imagem */
+}
+
+.cart {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espaço entre o ícone do carrinho e o texto "Carrinho" */
+}
+
+/* ------------------------------------- */
+/* CONTEÚDO PRINCIPAL DA LISTA DE PRODUTOS */
+/* ------------------------------------- */
+.list-container {
+    padding: 0 20px; /* Padding lateral para alinhar com o cabeçalho */
+    text-align: center; /* Centraliza o título "Lista de Produtos" */
+}
+
+.list-container h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.table-wrapper {
+    width: 80%; /* Largura da tabela, ajuste conforme necessário */
+    margin: 0 auto; /* Centraliza a tabela na página */
+    border: 2px solid #264699; /* Borda azul */
+    border-radius: 10px;
+    overflow: hidden; /* Garante que a borda arredondada se aplique ao conteúdo */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaçamento entre as células */
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Linha divisória entre as linhas */
+}
+
+th {
+    background-color: #264699; /* Cor de fundo para o cabeçalho da tabela */
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+tbody tr:nth-child(even) { /* Estilo para linhas pares (listras zebradas) */
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1; /* Cor ao passar o mouse sobre a linha */
+}
+
+/* Estilos para os campos de input na tabela */
+table input[type="text"],
+table input[type="number"] {
+    width: 100%; /* Ocupa a largura total da célula */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    outline: none; /* Remove a borda de foco padrão do navegador */
+}
+
+/* Estilo para o botão "Salvar" (anteriormente "Editar") */
+.edit-btn {
+    background-color: #28a745; /* Um verde para o botão salvar */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: darken(#28a745, 10%); /* Escurece um pouco ao passar o mouse */
+}

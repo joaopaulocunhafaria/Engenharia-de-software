@@ -50,11 +50,10 @@ export class LoginClientComponent implements OnInit {
         this.router.navigate(['/home']);
       },
       error: (err: any) => {
-        console.error('Erro ao fazer login:', err.message);
-        this.error = err.message || 'Erro ao fazer login.';
+        console.error('Erro no login:', err);
+        this.error = err.error && err.error.message ? err.error.message : 'Login ou senha inválidos.';
         this.loading = false;
       }
     });
   }
-  
 }

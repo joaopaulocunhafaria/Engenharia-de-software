@@ -1,0 +1,42 @@
+<header>
+    <div class="logo">
+        <img src="assets/logo.png" alt="CEFET MARKET Logo">
+    </div>
+    </header>
+
+    <main class="list-container">
+        <h2>Lista de Produtos</h2>
+    
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>nome</th>
+                        <th>preço</th>
+                        <th>estoque</th>
+                        <th>categoria</th>
+                        <th>ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let produto of produtos">
+                        <td>
+                            <input [(ngModel)]="produto.nome" type="text">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="produto.preco" type="text">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="produto.estoque" type="number">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="produto.categoria" type="text">
+                        </td>
+                        <td>
+                            <button class="edit-btn save-btn" (click)="salvarProduto(produto)">salvar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
