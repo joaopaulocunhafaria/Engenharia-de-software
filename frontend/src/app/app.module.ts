@@ -14,6 +14,7 @@ import { ListagemProdutosComponent } from './pages/listagem-produtos/listagem-pr
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DetalheProdutoComponent } from './detalhe-produto/detalhe-produto.component';
 import { HeaderComponent } from './components/header/header.component';
+import { MinhaContaComponent } from './minha-conta/minha-conta.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HeaderComponent } from './components/header/header.component';
     ListagemProdutosComponent,
     NavbarComponent,
     DetalheProdutoComponent,
-    HeaderComponent
+    HeaderComponent,
+    MinhaContaComponent
   ],
   imports: [
     BrowserModule,
