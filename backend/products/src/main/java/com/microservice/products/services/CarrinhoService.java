@@ -42,6 +42,19 @@ public class CarrinhoService {
         }
     }
 
+    public Carrinho increase(String carrinhId) {
+        Optional<Carrinho> optionalCarrinho = carrinhoRepository.findById(carrinhId);
+        
+        if (optionalCarrinho.isPresent()) {
+            Carrinho carrinho = optionalCarrinho.get();
+            Integer currentQuantity = carrinho.getQuantity();
+            carrinho.setQuantity(currentQuantity == null ? 1 : currentQuantity + 1);
+            return carrinhoRepository.save(carrinho);
+        } else {
+            throw new RuntimeException("Carrinho not found with id: " + carrinhId);
+        }
+    }
+
     public void deleteById(String userId) {
         if (carrinhoRepository.existsById(userId)) {
             carrinhoRepository.deleteById(userId);
@@ -53,7 +66,5 @@ public class CarrinhoService {
     public List<Carrinho> findByUserId(String userId) {
         return carrinhoRepository.findByUserId(userId);
     }
-
-   
 
 }

@@ -32,7 +32,7 @@ public class CarrinhoController {
     private UsersProxy usersProxy;
 
     @GetMapping
-    public ResponseEntity<?> findAll(@RequestBody AuthenticationDTO req) {
+    public ResponseEntity<?> findAll() {
         try {
 
             List<Carrinho> carrinhos = carrinhoService.findAll();
@@ -45,17 +45,17 @@ public class CarrinhoController {
         }
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<?> findById(@RequestBody AuthenticationDTO req, @PathVariable String userId) {
+    @GetMapping("/id/{carrinhoId}")
+    public ResponseEntity<?> findById(  @PathVariable String carrinhoId) {
         try {
             
 
-            Optional<Carrinho> carrinho = carrinhoService.findById(userId);
+            Optional<Carrinho> carrinho = carrinhoService.findById(carrinhoId);
 
             if (carrinho.isPresent()) {
                 return ResponseEntity.ok(carrinho.get());
             } else {
-                return ResponseEntity.badRequest().body("Carrinho não encontrado para o usuário: " + userId);
+                return ResponseEntity.badRequest().body("Carrinho não encontrado com ID: " + carrinhoId);
             }
         } catch (FeignException e) {
             return ResponseEntity.badRequest().body("Token inválido");
@@ -96,6 +96,23 @@ public class CarrinhoController {
         }
     }
 
+    @PutMapping("/increase/{carrinhoId}")
+    public ResponseEntity<?> increase( @PathVariable String carrinhoId) {
+        try {
+         
+            Carrinho updatedCarrinho = carrinhoService.increase( carrinhoId);
+
+            return ResponseEntity.ok(updatedCarrinho);
+        } catch (FeignException e) {
+            return ResponseEntity.badRequest().body("Token inválido");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erro ao atualizar o carrinho: " + e.getMessage());
+        }
+    }
+
+
     @DeleteMapping("/{userId}")
     public ResponseEntity<?> deleteById(@PathVariable String userId, @RequestBody AuthenticationDTO req) {
         try {
@@ -112,6 +129,8 @@ public class CarrinhoController {
             return ResponseEntity.badRequest().body("Erro ao deletar o carrinho: " + e.getMessage());
         }
     }
+
+
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> findByUserId(@PathVariable String userId) {

@@ -22,10 +22,12 @@ public class Carrinho {
 
     private String userId;
     private String productId;
+    private Integer quantity;
 
     public Carrinho(Carrinho dto) {
         this.userId = dto.getUserId();
         this.productId = dto.getProductId();
+        this.quantity = dto.getQuantity();
         this.id = generateId(userId, productId);
     }
 
