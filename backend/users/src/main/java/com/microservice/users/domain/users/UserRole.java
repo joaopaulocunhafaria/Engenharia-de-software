@@ -2,6 +2,7 @@ package com.microservice.users.domain.users;
 
 public enum UserRole {
     ADMIN("admin"),
+    SELLER("seller"),
     USER("user");
 
     private String role;

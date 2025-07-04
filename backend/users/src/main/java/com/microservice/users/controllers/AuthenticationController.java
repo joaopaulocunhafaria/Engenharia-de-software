@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,8 +51,12 @@ public class AuthenticationController {
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
-
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        var firstRole = auth.getAuthorities().stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse("ROLE_USER");
+                
+        return ResponseEntity.ok(new LoginResponseDTO(token, firstRole));
     }
 
     @PostMapping("/register")
@@ -69,9 +74,9 @@ public class AuthenticationController {
     }
 
     @GetMapping("/validate/{token}")
-    public ResponseEntity<String> validateToken(@PathVariable String  token) {
+    public ResponseEntity<String> validateToken(@PathVariable String token) {
         try {
-            
+
             String email = tokenService.validateToken(token);
             System.out.println("Token validate: " + token);
             User usr = userRepository.findByEmail(email);
@@ -79,7 +84,7 @@ public class AuthenticationController {
                 logger.warn("Tentativa de validação com token de usuário inexistente: {}", email);
                 return ResponseEntity.status(401).body("Usuário não encontrado");
             }
-            
+
             return ResponseEntity.ok(usr.getEmail());
         } catch (JWTVerificationException e) {
             logger.warn("Tentativa de validação com token inválido: {}", token);
