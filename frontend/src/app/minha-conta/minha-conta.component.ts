@@ -24,8 +24,13 @@ export class MinhaContaComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  
   navigateToListagemProduto() {
     this.router.navigate(['/listagem-produto']);
+  }
+
+  navigateToDadosPessoais(){
+    this.router.navigate(['/dados-pessoais']);
   }
   
 }

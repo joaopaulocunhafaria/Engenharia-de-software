@@ -1,0 +1,73 @@
+<div class="personal-data-container">
+    <header>
+      <div class="logo">
+        <a [routerLink]="['/home']" class="logo-link">
+          <img src="assets/logo.png" alt="CEFET MARKET Logo">
+        </a>
+      </div>
+    </header>
+  
+    <main class="personal-data-box">
+      <h2>Dados Pessoais:</h2>
+  
+      <form [formGroup]="personalDataForm" (ngSubmit)="onSave()">
+  
+        <div class="form-group">
+          <label for="nomeCompleto">Nome Completo:</label>
+          <div class="data-display" *ngIf="!editMode">{{ nomeCompleto }}</div>
+          <input type="text" id="nomeCompleto" formControlName="nomeCompleto" class="data-input"
+                 *ngIf="editMode" [ngClass]="{ 'is-invalid': f.nomeCompleto.invalid && (f.nomeCompleto.dirty || f.nomeCompleto.touched) }">
+          <div *ngIf="f.nomeCompleto.invalid && (f.nomeCompleto.dirty || f.nomeCompleto.touched)" class="invalid-feedback">
+            Nome Completo é obrigatório.
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <div class="data-display" *ngIf="!editMode">{{ email }}</div>
+          <input type="email" id="email" formControlName="email" class="data-input"
+                 *ngIf="editMode" [ngClass]="{ 'is-invalid': f.email.invalid && (f.email.dirty || f.email.touched) }">
+          <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="invalid-feedback">
+            <span *ngIf="f.email.errors?.required">Email é obrigatório.</span>
+            <span *ngIf="f.email.errors?.email">Email inválido.</span>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="endereco">Endereço:</label>
+          <div class="data-display" *ngIf="!editMode">{{ endereco }}</div>
+          <input type="text" id="endereco" formControlName="endereco" class="data-input"
+                 *ngIf="editMode" [ngClass]="{ 'is-invalid': f.endereco.invalid && (f.endereco.dirty || f.endereco.touched) }">
+          <div *ngIf="f.endereco.invalid && (f.endereco.dirty || f.endereco.touched)" class="invalid-feedback">
+            Endereço é obrigatório.
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="password">Senha:</label>
+          <div class="data-display password-display" *ngIf="!editMode">******</div>
+          <input type="password" id="password" formControlName="password" class="data-input"
+                 placeholder="Deixe em branco para não alterar"
+                 *ngIf="editMode" [ngClass]="{ 'is-invalid': f.password.invalid && (f.password.dirty || f.password.touched) }">
+          <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)" class="invalid-feedback">
+            <span *ngIf="f.password.errors?.minlength">Senha deve ter no mínimo 6 caracteres.</span>
+          </div>
+        </div>
+  
+        <div class="action-buttons">
+          <button type="button" class="action-button edit-button" *ngIf="!editMode" (click)="toggleEditMode()">
+            Editar Dados
+          </button>
+  
+          <button type="submit" class="action-button save-button" *ngIf="editMode">
+            Salvar
+          </button>
+  
+          <button type="button" class="action-button cancel-button" *ngIf="editMode" (click)="toggleEditMode()">
+            Cancelar
+          </button>
+        </div>
+  
+      </form>
+    </main>
+  </div>
