@@ -64,11 +64,82 @@
     </div>
   </header>
 
+  <!-- Sidebar Toggle Button -->
+  <button class="sidebar-toggle" (click)="toggleSidebar()" [class.active]="sidebarOpen">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" [class.show]="sidebarOpen" (click)="closeSidebar()"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.open]="sidebarOpen">
+    <div class="sidebar-header">
+      <h3>Menu</h3>
+      <button class="close-btn" (click)="closeSidebar()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" (click)="navigateToSection('home', $event)">
+        <i class="fas fa-home"></i>
+        <span>Início</span>
+      </a>
+      
+      <a href="#" class="nav-item" (click)="navigateToSection('categories', $event)">
+        <i class="fas fa-th-large"></i>
+        <span>Categorias</span>
+      </a>
+      
+      <a href="#" class="nav-item" (click)="navigateToSection('offers', $event)">
+        <i class="fas fa-tag"></i>
+        <span>Ofertas</span>
+      </a>
+      
+      <a href="#" class="nav-item" (click)="navigateToSection('favorites', $event)">
+        <i class="fas fa-heart"></i>
+        <span>Favoritos</span>
+      </a>
+      
+      <a href="#" class="nav-item" (click)="navigateToSection('orders', $event)">
+        <i class="fas fa-box"></i>
+        <span>Meus Pedidos</span>
+      </a>
+      
+      <div class="nav-divider"></div>
+      
+      <a href="#" class="nav-item" (click)="navigateToSection('profile', $event)">
+        <i class="fas fa-user"></i>
+        <span>Meu Perfil</span>
+      </a>
+      
+      <a href="#" class="nav-item" (click)="navigateToSection('settings', $event)">
+        <i class="fas fa-cog"></i>
+        <span>Configurações</span>
+      </a>
+      
+      <a href="#" class="nav-item" (click)="navigateToSection('help', $event)">
+        <i class="fas fa-question-circle"></i>
+        <span>Ajuda</span>
+      </a>
+      
+      <div class="nav-divider"></div>
+      
+      <a href="#" class="nav-item logout" (click)="logout($event)">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Sair</span>
+      </a>
+    </nav>
+  </aside>
+
   <!-- Main Content -->
-  <main class="main-content">
+  <main class="main-content" [class.sidebar-open]="sidebarOpen">
     <h1 class="products-title">Produtos</h1>
     
-    <div class="produtos" >
+    <div class="produtos">
       <div class="card" *ngFor="let p of products" (click)="viewProductDetails(p.id)">
         <img [src]="p.image" alt="Imagem do produto" />
         <h3>{{ p.title }}</h3>
@@ -76,6 +147,5 @@
         <strong>R$ {{ p.price }}</strong>
       </div>
     </div>
- 
   </main>
 </div>

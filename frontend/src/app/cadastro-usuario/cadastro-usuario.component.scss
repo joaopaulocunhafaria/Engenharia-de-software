@@ -1,0 +1,387 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+// Variables (mesmas da home)
+$primary-blue: #264699;
+$white: #ffffff;
+$light-gray: #f5f5f5;
+$medium-gray: #e0e0e0;
+$dark-gray: #666666;
+$text-dark: #333333;
+$border-radius: 20px;
+$success-color: #28a745;
+$error-color: #dc3545;
+$card-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: $white;
+  color: $text-dark;
+}
+
+// Header (mesmo estilo da home)
+.header {
+  background-color: $primary-blue;
+  color: $white;
+  padding: 20px 0;
+
+  .header-content {
+    @include flex-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    cursor: pointer;
+
+    i {
+      font-size: 24px;
+    }
+  }
+
+  .logo {
+    @include flex-center;
+    cursor: pointer;
+
+    .logo-image {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+    }
+  }
+
+  .cart {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    cursor: pointer;
+
+    i {
+      font-size: 24px;
+    }
+  }
+}
+
+// Main Content
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  min-height: calc(100vh - 140px);
+  @include flex-center;
+}
+
+// Cadastro Container
+.cadastro-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+
+  .page-title {
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: $text-dark;
+    text-align: center;
+  }
+}
+
+// Form Wrapper
+.form-wrapper {
+  background-color: $white;
+  border: 2px solid $medium-gray;
+  border-radius: $border-radius;
+  padding: 40px;
+  box-shadow: $card-shadow;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $primary-blue;
+    transform: translateY(-2px);
+  }
+}
+
+// Form Styles
+.cadastro-form {
+  .form-group {
+    margin-bottom: 25px;
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      color: $text-dark;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid $medium-gray;
+      border-radius: $border-radius;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s ease;
+      background-color: $white;
+
+      &:focus {
+        border-color: $primary-blue;
+        box-shadow: 0 0 0 3px rgba(38, 70, 153, 0.1);
+      }
+
+      &::placeholder {
+        color: $dark-gray;
+      }
+
+      &.is-invalid {
+        border-color: $error-color;
+        box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+      }
+    }
+
+    .password-wrapper {
+      position: relative;
+
+      .password-input {
+        padding-right: 55px;
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: $dark-gray;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 5px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: $primary-blue;
+          background-color: rgba(38, 70, 153, 0.1);
+        }
+      }
+    }
+
+    .error-message {
+      color: $error-color;
+      font-size: 14px;
+      margin-top: 5px;
+      font-weight: 400;
+    }
+  }
+}
+
+// Alert Error
+.alert-error {
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid $error-color;
+  color: $error-color;
+  padding: 15px 20px;
+  border-radius: $border-radius;
+  margin-bottom: 25px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+// Form Actions
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .btn-primary {
+    width: 100%;
+    padding: 15px 30px;
+    background-color: $success-color;
+    color: $white;
+    border: none;
+    border-radius: $border-radius;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    @include flex-center;
+    gap: 10px;
+
+    &:hover:not(:disabled) {
+      background-color: darken($success-color, 10%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    }
+
+    &:disabled {
+      background-color: $medium-gray;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid transparent;
+      border-top: 2px solid $white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  .btn-secondary {
+    @include flex-center;
+    width: 100%;
+    padding: 15px 30px;
+    background-color: transparent;
+    color: $primary-blue;
+    border: 2px solid $primary-blue;
+    border-radius: $border-radius;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $primary-blue;
+      color: $white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(38, 70, 153, 0.3);
+    }
+  }
+}
+
+// Animations
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .header {
+    .header-content {
+      padding: 0 20px;
+    }
+  }
+
+  .main-content {
+    padding: 30px 20px;
+  }
+
+  .cadastro-container {
+    .page-title {
+      font-size: 36px;
+    }
+  }
+
+  .form-wrapper {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    .header-content {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .logo {
+      order: -1;
+    }
+
+    .user-info,
+    .cart {
+      font-size: 14px;
+
+      i {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .cadastro-container {
+    .page-title {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+  }
+
+  .form-wrapper {
+    padding: 25px;
+  }
+
+  .form-actions {
+    .btn-primary,
+    .btn-secondary {
+      padding: 12px 25px;
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .cadastro-container {
+    .page-title {
+      font-size: 24px;
+    }
+  }
+
+  .form-wrapper {
+    padding: 20px;
+  }
+
+  .cadastro-form {
+    .form-group {
+      margin-bottom: 20px;
+
+      .form-input {
+        padding: 12px 15px;
+        font-size: 15px;
+      }
+
+      .password-wrapper {
+        .password-toggle {
+          right: 10px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
