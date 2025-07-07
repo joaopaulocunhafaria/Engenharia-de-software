@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginClientComponent } from './login-client/login-client.component';
 import { HomeComponent } from './home/home.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import { CadastrarProdutoComponent } from './cadastrar-produto/cadastrar-produto.component';
-import { ListagemProdutosComponent } from './pages/listagem-produtos/listagem-produtos.component';
+import { ListagemProdutoComponent } from './listagem-produto/listagem-produto.component';
 import { DetalheProdutoComponent } from './detalhe-produto/detalhe-produto.component';
+import { MinhaContaComponent } from './minha-conta/minha-conta.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,8 +15,9 @@ const routes: Routes = [
   { path: 'cadastrar-produto', component: CadastrarProdutoComponent },
   { path: 'home', component: HomeComponent },
   { path: 'detalhe', component: DetalheProdutoComponent },
-  { path: 'produtos/:termoBusca', component: ListagemProdutosComponent },
+  { path: 'listagem-produto', component: ListagemProdutoComponent},
   { path: 'produto/:id', component: DetalheProdutoComponent},
+  { path: 'minha-conta', component: MinhaContaComponent},
   { path: '**', redirectTo: 'home' }
 ];
 

@@ -28,7 +28,7 @@ import { MinhaContaComponent } from './minha-conta/minha-conta.component';
     NavbarComponent,
     DetalheProdutoComponent,
     HeaderComponent,
-    ListagemProdutoComponent
+    ListagemProdutoComponent,
     MinhaContaComponent,
 
   ],

@@ -23,4 +23,9 @@ export class MinhaContaComponent implements OnInit {
     console.log('Usuário deslogado');
     this.router.navigate(['/login']);
   }
+
+  navigateToListagemProduto() {
+    this.router.navigate(['/listagem-produto']);
+  }
+  
 }

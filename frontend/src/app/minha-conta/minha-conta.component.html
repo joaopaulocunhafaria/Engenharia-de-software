@@ -1,8 +1,7 @@
 <header>
     <div class="logo">
-        <a [routerLink]="['/home']" class="logo-link">
+        <a [routerLink]="['/home']" class="logo-link"></a>
         <img src="assets/logo.png" alt="CEFET MARKET Logo">
-        </a>
     </div>
 </header>
 
@@ -35,7 +34,7 @@
       </div>
   
       <!-- Minhas Vendas -->
-      <div class="option-card" routerLink="/minhas-vendas">
+      <div class="option-card" [routerLink]="['/listagem-produto']">
         <div class="option-content">
           <h3>Minhas Vendas</h3>
           <p>Meus produtos de vendas</p>
@@ -44,7 +43,7 @@
       </div>
   
       <!-- Trocar de Conta -->
-      <div class="option-card" routerLink="/trocar-conta">
+      <div class="option-card" routerLink="/login">
         <div class="option-content">
           <h3>Trocar de Conta</h3>
           <p>Mude o usuário</p>

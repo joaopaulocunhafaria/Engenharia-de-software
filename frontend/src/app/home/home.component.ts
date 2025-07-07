@@ -66,4 +66,12 @@ export class HomeComponent implements OnInit {
   navigateToLogin(): void {
     this.router.navigate(['/login']);
   }
+
+  navigateToMinhaConta() {
+    this.router.navigate(['/minha-conta']);
+  }
+
+  navigateToMinhasVendas() {
+    this.router.navigate(['/minhas-vendas']);
+  }
 }
