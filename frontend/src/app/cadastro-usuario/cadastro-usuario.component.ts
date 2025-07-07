@@ -15,7 +15,11 @@ export class CadastroUsuarioComponent implements OnInit {
   errorMessage: string | null = null;
   showPassword = false;
 
-  constructor(private formBuilder: FormBuilder,private userService: UserService, private router:Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.cadastroForm = this.formBuilder.group({
@@ -62,5 +66,15 @@ export class CadastroUsuarioComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  // Métodos para navegação (mesmos da home)
+  navigateToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
+  navigateToCart(): void {
+    console.log('Navegando para o carrinho');
+    // Implementar navegação para o carrinho
   }
 }

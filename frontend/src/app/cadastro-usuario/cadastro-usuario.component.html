@@ -1,97 +1,118 @@
-<div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-4">
-        <div class="card shadow">
-          <div class="card-body p-4">
-            <h2 class="text-center mb-4">Cadastrar Cliente</h2>
-  
-            <form [formGroup]="cadastroForm" (ngSubmit)="salvar()">
-              <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nome"
-                  formControlName="nome"
-                  [ngClass]="{ 'is-invalid': submitted && cadastroForm.get('nome')?.invalid }"
-                  placeholder="Informe seu nome"
-                />
-                <div *ngIf="submitted && cadastroForm.get('nome')?.invalid" class="invalid-feedback">
-                  Nome é obrigatório.
-                </div>
-              </div>
-  
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  formControlName="email"
-                  [ngClass]="{ 'is-invalid': submitted && cadastroForm.get('email')?.invalid }"
-                  placeholder="Informe seu email"
-                />
-                <div *ngIf="submitted && cadastroForm.get('email')?.hasError('required')" class="invalid-feedback">
-                  Email é obrigatório.
-                </div>
-                <div *ngIf="submitted && cadastroForm.get('email')?.hasError('email')" class="invalid-feedback">
-                  Por favor, insira um email válido.
-                </div>
-              </div>
-  
-              <div class="mb-3">
-                <label for="endereco" class="form-label">Endereço</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="endereco"
-                  formControlName="endereco"
-                  [ngClass]="{ 'is-invalid': submitted && cadastroForm.get('endereco')?.invalid }"
-                  placeholder="Informe seu endereço"
-                />
-                <div *ngIf="submitted && cadastroForm.get('endereco')?.invalid" class="invalid-feedback">
-                  Endereço é obrigatório.
-                </div>
-              </div>
-  
-              <div class="mb-3">
-                <label for="senha" class="form-label">Senha</label>
-                <div class="input-group">
-                  <input
-                    [type]="showPassword ? 'text' : 'password'"
-                    class="form-control"
-                    id="senha"
-                    formControlName="senha"
-                    [ngClass]="{ 'is-invalid': submitted && cadastroForm.get('senha')?.invalid }"
-                    placeholder="Cadastre sua senha"
-                  />
-                  <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
-                    <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
-                  </button>
-                </div>
-                <div *ngIf="submitted && cadastroForm.get('senha')?.hasError('required')" class="invalid-feedback">
-                  Senha é obrigatória.
-                </div>
-                <div *ngIf="submitted && cadastroForm.get('senha')?.hasError('minlength')" class="invalid-feedback">
-                  A senha deve ter no mínimo 6 caracteres.
-                </div>
-              </div>
-  
-              <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-  
-              <button type="submit" class="btn btn-success w-100" [disabled]="cadastroForm.invalid || isLoading">
-                <span *ngIf="!isLoading">Salvar</span>
-                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span *ngIf="isLoading"> Carregando...</span>
-              </button>
-  
-              <div class="mt-3 text-center">
-                <a routerLink="/home" class="btn btn-link">Voltar</a>
-              </div>
-            </form>
-          </div>
-        </div>
+<!-- cadastro-usuario.component.html -->
+<div class="home-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <!-- User Info -->
+      <div class="user-info" (click)="navigateToLogin()">
+        <i class="fas fa-user-circle"></i>
+        <span class="username">nome_usuário</span>
+      </div>
+
+      <!-- Logo -->
+      <div class="logo">
+        <img src="assets/logo.png" alt="CEFET MARKET Logo" class="logo-image">
+      </div>
+
+      <!-- Cart -->
+      <div class="cart" (click)="navigateToCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-text">Carrinho</span>
       </div>
     </div>
-  </div>
-  
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="cadastro-container">
+      <h1 class="page-title">Cadastrar Cliente</h1>
+      
+      <div class="form-wrapper">
+        <form [formGroup]="cadastroForm" (ngSubmit)="salvar()" class="cadastro-form">
+          <div class="form-group">
+            <label for="nome" class="form-label">Nome</label>
+            <input
+              type="text"
+              class="form-input"
+              id="nome"
+              formControlName="nome"
+              [ngClass]="{ 'is-invalid': submitted && cadastroForm.get('nome')?.invalid }"
+              placeholder="Informe seu nome"
+            />
+            <div *ngIf="submitted && cadastroForm.get('nome')?.invalid" class="error-message">
+              Nome é obrigatório.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-input"
+              id="email"
+              formControlName="email"
+              [ngClass]="{ 'is-invalid': submitted && cadastroForm.get('email')?.invalid }"
+              placeholder="Informe seu email"
+            />
+            <div *ngIf="submitted && cadastroForm.get('email')?.hasError('required')" class="error-message">
+              Email é obrigatório.
+            </div>
+            <div *ngIf="submitted && cadastroForm.get('email')?.hasError('email')" class="error-message">
+              Por favor, insira um email válido.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="endereco" class="form-label">Endereço</label>
+            <input
+              type="text"
+              class="form-input"
+              id="endereco"
+              formControlName="endereco"
+              [ngClass]="{ 'is-invalid': submitted && cadastroForm.get('endereco')?.invalid }"
+              placeholder="Informe seu endereço"
+            />
+            <div *ngIf="submitted && cadastroForm.get('endereco')?.invalid" class="error-message">
+              Endereço é obrigatório.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="senha" class="form-label">Senha</label>
+            <div class="password-wrapper">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-input password-input"
+                id="senha"
+                formControlName="senha"
+                [ngClass]="{ 'is-invalid': submitted && cadastroForm.get('senha')?.invalid }"
+                placeholder="Cadastre sua senha"
+              />
+              <button class="password-toggle" type="button" (click)="togglePasswordVisibility()">
+                <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+              </button>
+            </div>
+            <div *ngIf="submitted && cadastroForm.get('senha')?.hasError('required')" class="error-message">
+              Senha é obrigatória.
+            </div>
+            <div *ngIf="submitted && cadastroForm.get('senha')?.hasError('minlength')" class="error-message">
+              A senha deve ter no mínimo 6 caracteres.
+            </div>
+          </div>
+
+          <div *ngIf="errorMessage" class="alert-error">{{ errorMessage }}</div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary" [disabled]="cadastroForm.invalid || isLoading">
+              <span *ngIf="!isLoading">Salvar</span>
+              <span *ngIf="isLoading" class="spinner"></span>
+              <span *ngIf="isLoading"> Carregando...</span>
+            </button>
+
+            <a routerLink="/home" class="btn-secondary">Voltar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
