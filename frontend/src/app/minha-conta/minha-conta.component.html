@@ -1,0 +1,64 @@
+<header>
+    <div class="logo">
+        <a [routerLink]="['/home']" class="logo-link">
+        <img src="assets/logo.png" alt="CEFET MARKET Logo">
+        </a>
+    </div>
+</header>
+
+<div class="minha-conta-container">
+    <div class="user-header">
+      <h1>Minha Conta</h1>
+      <div class="user-info">
+        <h2>nome_usuario</h2>
+        <h2>nome_usuario@email.com</h2>
+      </div>
+    </div>
+  
+    <div class="account-options">
+      <!-- Suas Informações -->
+      <div class="option-card" routerLink="/suas-informacoes">
+        <div class="option-content">
+          <h3>Suas Informações</h3>
+          <p>Nome de preferência e dados para te identificar</p>
+        </div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+ 
+      <!-- Meus Pedidos -->
+      <div class="option-card" routerLink="/meus-pedidos">
+        <div class="option-content">
+          <h3>Meus Pedidos</h3>
+          <p>Pedidos que estão à caminho e pedidos com pagamentos para renovar</p>
+        </div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+  
+      <!-- Minhas Vendas -->
+      <div class="option-card" routerLink="/minhas-vendas">
+        <div class="option-content">
+          <h3>Minhas Vendas</h3>
+          <p>Meus produtos de vendas</p>
+        </div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+  
+      <!-- Trocar de Conta -->
+      <div class="option-card" routerLink="/trocar-conta">
+        <div class="option-content">
+          <h3>Trocar de Conta</h3>
+          <p>Mude o usuário</p>
+        </div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+
+      <!-- Sair -->
+      <div class="option-card logout" (click)="logout()">
+        <div class="option-content">
+          <h3>Sair</h3>
+          <p>Log-out de conta</p>
+        </div>
+        <i class="fas fa-sign-out-alt"></i>
+      </div>
+    </div>
+  </div>

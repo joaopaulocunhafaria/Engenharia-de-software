@@ -1,0 +1,109 @@
+/* Importação da fonte Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+header {
+    margin-top: 0px;
+    background: #264699; /* Azul do CEFET MARKET */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Padding interno para o conteúdo do header */
+    width: 100%; /* Garante que o header ocupe toda a largura */
+    margin-bottom: 20px; /* Espaço abaixo do cabeçalho */
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre a imagem do logo e o texto "CEFET MARKET" */
+  }
+  
+  .logo img {
+    height: 50px; /* Ajuste a altura do logo conforme necessário */
+    /* Se o ícone for SVG, pode não precisar de margin-right se o gap resolver */
+  }
+
+.minha-conta-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: 'Poppins', sans-serif;
+
+  .user-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      color: #333;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .user-info {
+      h2 {
+        color: #555;
+        font-size: 1.1rem;
+        font-weight: 400;
+        margin: 0.3rem 0;
+      }
+    }
+  }
+
+  .account-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .option-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      }
+
+      .option-content {
+        h3 {
+          margin: 0 0 0.3rem 0;
+          color: #333;
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+
+        p {
+          margin: 0;
+          color: #666;
+          font-size: 0.9rem;
+          font-weight: 400;
+        }
+      }
+
+      i {
+        color: #888;
+      }
+
+      &.logout {
+        background: #fff0f0;
+
+        h3 {
+          color: #d32f2f;
+          font-weight: 500;
+        }
+
+        i {
+          color: #d32f2f;
+        }
+      }
+    }
+  }
+}
