@@ -7,6 +7,7 @@ import { CadastrarProdutoComponent } from './cadastrar-produto/cadastrar-produto
 import { ListagemProdutoComponent } from './listagem-produto/listagem-produto.component';
 import { DetalheProdutoComponent } from './detalhe-produto/detalhe-produto.component';
 import { MinhaContaComponent } from './minha-conta/minha-conta.component';
+import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'listagem-produto', component: ListagemProdutoComponent},
   { path: 'produto/:id', component: DetalheProdutoComponent},
   { path: 'minha-conta', component: MinhaContaComponent},
+  { path: 'dados-pessoais', component: DadosPessoaisComponent},
   { path: '**', redirectTo: 'home' }
 ];
 

@@ -1,0 +1,181 @@
+/* src/app/dados-pessoais/dados-pessoais.component.scss */
+
+/* Reset básico e fontes (pode estar em styles.scss global) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: #f4f4f4; /* Cor de fundo da imagem */
+  }
+  
+  .personal-data-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  /* Estilos do Cabeçalho (copiado para consistência) */
+  header {
+      background: #264699;
+      color:white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      width: 100%;
+  }
+  
+  .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+      cursor: pointer;
+  }
+  
+  .logo-link img {
+      height: 40px;
+  }
+  
+  .logo-link h1 {
+      font-size: 18px;
+      line-height: 1.2;
+      margin: 0;
+  }
+  
+  .cart{
+      color:white;
+      text-decoration: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+  }
+  
+  /* Estilos da Caixa de Dados Pessoais */
+  .personal-data-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    width: 500px;
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .personal-data-box h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  
+  .form-group {
+    margin-bottom: 25px;
+    text-align: left;
+  
+    label {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 8px;
+    }
+  
+    .data-display { /* Estilo para a visualização não editável */
+      background-color: #e9ecef;
+      padding: 12px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #333;
+      min-height: 45px;
+      display: flex;
+      align-items: center;
+    }
+  
+    .password-display {
+      font-family: monospace;
+      letter-spacing: 2px;
+    }
+  
+    .data-input { /* Estilo para os campos de input editáveis */
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #333;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  
+      &:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+  
+      &.is-invalid { /* Estilo para campos inválidos */
+        border-color: #dc3545;
+      }
+    }
+  
+    .invalid-feedback { /* Mensagens de erro de validação */
+      color: #dc3545;
+      font-size: 0.85em;
+      margin-top: 5px;
+      display: block;
+    }
+  }
+  
+  .action-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+    gap: 15px; /* Espaço entre os botões */
+  
+    .action-button {
+      padding: 12px 25px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      border: none;
+    }
+  
+    .edit-button {
+      background-color: #264699;
+      color: white;
+      &:hover {
+        background-color: darken(#264699, 10%);
+      }
+    }
+  
+    .save-button {
+      background-color: #28a745; /* Verde para Salvar */
+      color: white;
+      &:hover {
+        background-color: darken(#28a745, 10%);
+      }
+    }
+  
+    .cancel-button {
+      background-color: #6c757d; /* Cinza para Cancelar */
+      color: white;
+      &:hover {
+        background-color: darken(#6c757d, 10%);
+      }
+    }
+  }
