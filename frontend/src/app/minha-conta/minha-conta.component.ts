@@ -32,5 +32,10 @@ export class MinhaContaComponent implements OnInit {
   navigateToDadosPessoais(){
     this.router.navigate(['/dados-pessoais']);
   }
+
+  navigateToSeusPedidos(){
+    this.router.navigate(['/seus-pedidos']);
+  }
+
   
 }
