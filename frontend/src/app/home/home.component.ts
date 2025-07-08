@@ -44,6 +44,10 @@ export class HomeComponent implements OnInit {
   navigateToCart(): void {
     console.log('Navegando para o carrinho');
   }
+  
+    navigateToMinhaConta() {
+    this.router.navigate(['/minha-conta']);
+  }
 
   searchProducts(searchTerm: string): void {
     if (searchTerm) {
