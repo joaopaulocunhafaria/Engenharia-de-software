@@ -6,11 +6,8 @@ import { Produto } from '../Domain/Models/Product.Model';
 @Component({
   selector: 'app-cadastrar-produto',
   templateUrl: './cadastrar-produto.component.html',
-  styleUrls: ['./cadastrar-produto.component.scss']
+  styleUrls: ['./cadastrar-produto.component.scss'],
 })
-
-
-
 export class CadastrarProdutoComponent implements OnInit {
   form!: FormGroup; // substitui o objeto produto
   imagemSelecionada: File | null = null;
@@ -25,7 +22,7 @@ export class CadastrarProdutoComponent implements OnInit {
       descricao: ['', Validators.required],
       preco: [null, [Validators.required, Validators.min(0.01)]],
       estoque: [null, [Validators.required, Validators.min(1)]],
-      categoria: ['', Validators.required]
+      categoria: ['', Validators.required],
     });
   }
 
@@ -39,30 +36,28 @@ export class CadastrarProdutoComponent implements OnInit {
 
   cadastrar() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched(); // força exibir os erros 
+      this.form.markAllAsTouched(); // força exibir os erros
       return;
     }
 
     const produto = this.form.value;
-
-    const produtoPayload:Produto = {
-      id: 0, 
-      token: 'some-token', 
-      title: produto.nome,
-      description: produto.descricao,
-      image: this.imagemSelecionada ? this.imagemSelecionada.name : '',
-      ownerId: 'some-owner-id',
-      category: produto.categoria,
-      price: produto.preco
-    };
-    
-    this.produtoService.createProduto(produtoPayload).subscribe({
+ 
+    const formData = new FormData();
+    if (this.imagemSelecionada) {
+      formData.append('image', this.imagemSelecionada); // tipo: File
+    }
+    formData.append('title', produto.nome);
+    formData.append('description', produto.descricao);
+    formData.append('ownerId', "3");
+    formData.append('category', produto.categoria);
+    formData.append('price', produto.preco.toString());
+    this.produtoService.createProduto(formData).subscribe({
       next: (response) => {
-        console.log('Produto cadastrado com sucesso:', response); 
+        console.log('Produto cadastrado com sucesso:', response);
       },
       error: (error) => {
-        console.error('Erro ao cadastrar produto:', error); 
-      } 
+        console.error('Erro ao cadastrar produto:', error);
+      },
     });
   }
 }

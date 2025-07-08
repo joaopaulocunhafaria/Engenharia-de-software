@@ -141,7 +141,7 @@
     
     <div class="produtos">
       <div class="card" *ngFor="let p of products" (click)="viewProductDetails(p.id)">
-        <img [src]="p.image" alt="Imagem do produto" />
+        <img [src]="'data:image/jpeg;base64,' + p.image"  alt="Imagem do produto" />
         <h3>{{ p.title }}</h3>
         <p>{{ p.description }}</p>
         <strong>R$ {{ p.price }}</strong>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { productsMocks } from '../Domain/Mocks/Products.Mocks';
+import { ProdutoService } from '../services/produtos/produto.service';
 
 @Component({
   selector: 'app-detalhe-produto',
@@ -14,11 +15,16 @@ export class DetalheProdutoComponent implements OnInit {
   userComment: string = '';
   maxStock: number = 20;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+        private produtoService: ProdutoService) { }
 
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
-    this.product = productsMocks.find(p => p.id === Number(productId));
+    
+    //Chamar no back end para retornar os dados do produto, tem que criar o metodo getById.
+    //Chamar na rota /products/:id no back end 
+    //this.produtoService 
+    
   }
 
   increaseQuantity(): void {

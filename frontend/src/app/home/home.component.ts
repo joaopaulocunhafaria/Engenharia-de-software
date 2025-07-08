@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { productsMocks } from '../Domain/Mocks/Products.Mocks';
+import { Router } from '@angular/router'; 
 import { categoriesMocks } from '../Domain/Mocks/Categories.Mocks';
+import { ProdutoService } from '../services/produtos/produto.service';
 
 @Component({
   selector: 'app-home',
@@ -13,12 +13,23 @@ export class HomeComponent implements OnInit {
   selectedCategory = 'all';
   sidebarOpen = false; // Nova propriedade para controlar a sidebar
 
-  products = productsMocks;
+  products:any = [];
   categories = categoriesMocks;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+      private produtoService: ProdutoService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.produtoService.listarTodos().subscribe({
+      next: (response) => {
+        this.products = response;
+        console.log('Produtos carregados:', this.products);
+      },
+      error: (error) => {
+        console.error('Erro ao carregar produtos:', error);
+      }
+    });
+  } 
 
   // Métodos existentes
   toggleCategories(): void {
