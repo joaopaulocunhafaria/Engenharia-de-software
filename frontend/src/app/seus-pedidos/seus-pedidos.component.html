@@ -1,0 +1,40 @@
+<div class="orders-container">
+    <header>
+      <div class="logo">
+        <a [routerLink]="['/home']" class="logo-link">
+          <img src="assets/logo.png" alt="CEFET MARKET Logo">
+        </a>
+      </div>
+      <a [routerLink]="['/carrinho']" class="cart">
+        <i class="fas fa-shopping-cart"></i> Carrinho
+      </a>
+    </header>
+  
+    <main class="orders-content">
+      <h2>Seus Pedidos:</h2>
+  
+      <div class="order-list">
+        <div class="order-card" *ngFor="let pedido of pedidos">
+          <div class="order-details">
+            <div class="product-name">
+              <strong>{{ pedido.nomeProduto }}</strong> </div>
+            <div class="info-row">
+              <span>Preço:</span>
+              <span>R${{ pedido.preco | number:'1.2-2' }}</span> </div>
+            <div class="info-row">
+              <span>Quantidade:</span>
+              <span>{{ pedido.quantidade }}x</span>
+            </div>
+          </div>
+          <div class="order-status">
+            <span class="status-label">Status:</span>
+            <span class="status-value status-{{ getStatusClass(pedido.status) }}">{{ pedido.status }}</span>
+          </div>
+          <div class="order-actions">
+            <button class="show-product-button" [routerLink]="['/detalhe']"> Mostrar Produto
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
