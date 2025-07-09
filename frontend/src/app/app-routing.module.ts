@@ -9,6 +9,7 @@ import { DetalheProdutoComponent } from './detalhe-produto/detalhe-produto.compo
 import { MinhaContaComponent } from './minha-conta/minha-conta.component';
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 import { SeusPedidosComponent } from './seus-pedidos/seus-pedidos.component';
+import { ListagemUsuarioComponent } from './listagem-usuario/listagem-usuario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'minha-conta', component: MinhaContaComponent},
   { path: 'dados-pessoais', component: DadosPessoaisComponent},
   { path: 'seus-pedidos', component: SeusPedidosComponent},
+  { path: 'listagem-usuario', component: ListagemUsuarioComponent},
   { path: '**', redirectTo: 'home' }
 ];
 

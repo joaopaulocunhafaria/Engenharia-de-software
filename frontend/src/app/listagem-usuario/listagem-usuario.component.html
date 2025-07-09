@@ -1,0 +1,43 @@
+<div class="listagem-usuario-container">
+    <header>
+        <div class="logo">
+            <a [routerLink]="['/home']" class="logo-link">
+                <img src="assets/logo.png" alt="CEFET MARKET Logo">
+            </a>
+        </div>
+        </header>
+
+    <main class="listagem-usuario-content">
+        <h2>Lista de Usuário</h2>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Cargo</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.nome }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <select [(ngModel)]="user.cargo">
+                                <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                            </select>
+                        </td>
+                        <td class="actions">
+                            <button class="save-button" (click)="saveRole(user)">salvar</button>
+                            <button class="delete-button" (click)="deleteUser(user.id)">
+                                Deletar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
