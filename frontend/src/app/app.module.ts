@@ -17,6 +17,7 @@ import { ListagemProdutoComponent } from './listagem-produto/listagem-produto.co
 import { MinhaContaComponent } from './minha-conta/minha-conta.component';
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 import { SeusPedidosComponent } from './seus-pedidos/seus-pedidos.component';
+import { ListagemUsuarioComponent } from './listagem-usuario/listagem-usuario.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SeusPedidosComponent } from './seus-pedidos/seus-pedidos.component';
     MinhaContaComponent,
     DadosPessoaisComponent,
     SeusPedidosComponent,
+    ListagemUsuarioComponent,
 
   ],
   imports: [

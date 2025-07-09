@@ -1,9 +1,10 @@
 <header>
-    <div class="logo">
-        <a [routerLink]="['/home']" class="logo-link"></a>
-        <img src="assets/logo.png" alt="CEFET MARKET Logo">
-    </div>
-</header>
+  <div class="logo">
+      <a [routerLink]="['/home']" class="logo-link">
+          <img src="assets/logo.png" alt="CEFET MARKET Logo">
+      </a>
+  </div>
+  </header>
 
 <div class="minha-conta-container">
     <div class="user-header">
@@ -38,6 +39,14 @@
         <div class="option-content">
           <h3>Minhas Vendas</h3>
           <p>Meus produtos de vendas</p>
+        </div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+
+      <div class="option-card" [routerLink]="['/listagem-usuario']">
+        <div class="option-content">
+          <h3>Usuários</h3>
+          <p>Gerenciador de usuários</p>
         </div>
         <i class="fas fa-chevron-right"></i>
       </div>
