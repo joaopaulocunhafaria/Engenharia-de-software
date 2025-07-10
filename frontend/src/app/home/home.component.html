@@ -1,35 +1,36 @@
-<!-- home.component.html -->
 <div class="home-container">
-  <!-- Header -->
   <header class="header">
     <div class="header-content">
-      <!-- User Info -->
-      <div class="user-info" (click)="navigateToMinhaConta()">
-        <i class="fas fa-user-circle"></i>
-        <span class="username">nome_usuário</span>
+      <div class="user-info">
+        <div *ngIf="isLoggedIn; else showLoginButtons" class="user-welcome" (click)="navigateToMinhaConta()">
+          <i class="fas fa-user-circle"></i>
+          <span class="username">Olá, {{ userName }}</span>
+        </div>
+  
+        <ng-template #showLoginButtons>
+          <div class="auth-buttons">
+            <button class="auth-btn login-btn" (click)="navigateToLogin()">Login</button>
+            <button class="auth-btn register-btn" (click)="navigateToRegister()">Cadastre-se</button>
+          </div>
+        </ng-template>
       </div>
 
-      <!-- Logo -->
       <div class="logo">
         <img src="assets/logo.png" alt="CEFET MARKET Logo" class="logo-image">
       </div>
 
-      <!-- Cart -->
       <div class="cart" (click)="navigateToCart()">
         <i class="fas fa-shopping-cart"></i>
         <span class="cart-text">Carrinho</span>
       </div>
     </div>
 
-    <!-- Search Bar -->
     <div class="search-section">
-      <!-- Categories -->
       <div class="categories" (click)="toggleCategories()">
         <i class="fas fa-bars"></i>
         <span>Todas as categorias</span>
         <i class="fas fa-chevron-down dropdown-icon" [class.rotate]="showCategories"></i>
         
-        <!-- Dropdown Menu -->
         <div class="categories-dropdown" [class.show]="showCategories">
           <a href="#" class="category-item" (click)="selectCategory('all', $event)">
             <i class="fas fa-th"></i>
@@ -39,22 +40,9 @@
             <i class="fas fa-book"></i>
             Livros
           </a>
-          <a href="#" class="category-item" (click)="selectCategory('notebook', $event)">
-            <i class="fas fa-laptop"></i>
-            Notebook
-          </a>
-          <a href="#" class="category-item" (click)="selectCategory('cama-banho', $event)">
-            <i class="fas fa-bed"></i>
-            Cama e banho
-          </a>
-          <a href="#" class="category-item" (click)="selectCategory('mobilia', $event)">
-            <i class="fas fa-couch"></i>
-            Mobília
-          </a>
         </div>
       </div>
 
-      <!-- Search Input -->
       <div class="search-bar">
         <i class="fas fa-search"></i>
         <input type="text" placeholder="Buscar produtos, marcas, entre outros..." 
@@ -64,17 +52,14 @@
     </div>
   </header>
 
-  <!-- Sidebar Toggle Button -->
   <button class="sidebar-toggle" (click)="toggleSidebar()" [class.active]="sidebarOpen">
     <span class="bar"></span>
     <span class="bar"></span>
     <span class="bar"></span>
   </button>
 
-  <!-- Sidebar Overlay -->
   <div class="sidebar-overlay" [class.show]="sidebarOpen" (click)="closeSidebar()"></div>
 
-  <!-- Sidebar -->
   <aside class="sidebar" [class.open]="sidebarOpen">
     <div class="sidebar-header">
       <h3>Menu</h3>
@@ -84,58 +69,57 @@
     </div>
 
     <nav class="sidebar-nav">
-      <a href="#" class="nav-item active" (click)="navigateToSection('home', $event)">
-        <i class="fas fa-home"></i>
-        <span>Início</span>
-      </a>
-      
-      <a href="#" class="nav-item" (click)="navigateToSection('categories', $event)">
-        <i class="fas fa-th-large"></i>
-        <span>Categorias</span>
-      </a>
-      
-      <a href="#" class="nav-item" (click)="navigateToSection('offers', $event)">
+
+      <a *ngIf="userRole === 'VISITANTE' || userRole === 'CLIENTE'" href="#" class="nav-item" (click)="navigateTo('/ofertas', $event)">
         <i class="fas fa-tag"></i>
         <span>Ofertas</span>
       </a>
-      
-      <a href="#" class="nav-item" (click)="navigateToSection('favorites', $event)">
-        <i class="fas fa-heart"></i>
-        <span>Favoritos</span>
-      </a>
-      
-      <a href="#" class="nav-item" (click)="navigateToSection('orders', $event)">
-        <i class="fas fa-box"></i>
-        <span>Meus Pedidos</span>
-      </a>
-      
-      <div class="nav-divider"></div>
-      
-      <a href="#" class="nav-item" (click)="navigateToSection('profile', $event)">
-        <i class="fas fa-user"></i>
-        <span>Meu Perfil</span>
-      </a>
-      
-      <a href="#" class="nav-item" (click)="navigateToSection('settings', $event)">
+      <a *ngIf="userRole === 'VISITANTE' || userRole === 'CLIENTE'" href="#" class="nav-item" (click)="navigateTo('/configuracoes', $event)">
         <i class="fas fa-cog"></i>
         <span>Configurações</span>
       </a>
       
-      <a href="#" class="nav-item" (click)="navigateToSection('help', $event)">
-        <i class="fas fa-question-circle"></i>
-        <span>Ajuda</span>
+      <a *ngIf="isLoggedIn" href="#" class="nav-item" (click)="navigateTo('/minha-conta', $event)">
+        <i class="fas fa-user-circle"></i>
+        <span>Minha Conta</span>
+      </a>
+
+      <a *ngIf="userRole === 'CLIENTE'" href="#" class="nav-item" (click)="navigateTo('/minhas-compras', $event)">
+        <i class="fas fa-box"></i>
+        <span>Minhas Compras</span>
+      </a>
+      <a *ngIf="userRole === 'CLIENTE'" href="#" class="nav-item" (click)="navigateTo('/carrinho', $event)">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Carrinho</span>
+      </a>
+
+      <a *ngIf="userRole === 'VENDEDOR'" href="#" class="nav-item" (click)="navigateTo('/cadastrar-produto', $event)">
+        <i class="fas fa-plus-circle"></i>
+        <span>Cadastrar Produto</span>
+      </a>
+      <a *ngIf="userRole === 'VENDEDOR'" href="#" class="nav-item" (click)="navigateTo('/editar-produto', $event)">
+        <i class="fas fa-edit"></i>
+        <span>Editar Produto</span>
+      </a>
+
+      <a *ngIf="userRole === 'ADMIN'" href="#" class="nav-item" (click)="navigateTo('/cadastrar-usuario', $event)">
+        <i class="fas fa-user-plus"></i>
+        <span>Cadastrar Usuário</span>
+      </a>
+      <a *ngIf="userRole === 'ADMIN'" href="#" class="nav-item" (click)="navigateTo('/editar-usuario', $event)">
+        <i class="fas fa-user-edit"></i>
+        <span>Editar Usuário</span>
       </a>
       
-      <div class="nav-divider"></div>
+      <div *ngIf="isLoggedIn" class="nav-divider"></div>
       
-      <a href="#" class="nav-item logout" (click)="logout($event)">
+      <a *ngIf="isLoggedIn" href="#" class="nav-item logout" (click)="logout($event)">
         <i class="fas fa-sign-out-alt"></i>
         <span>Sair</span>
       </a>
     </nav>
-  </aside>
+    </aside>
 
-  <!-- Main Content -->
   <main class="main-content" [class.sidebar-open]="sidebarOpen">
     <h1 class="products-title">Produtos</h1>
     
@@ -148,4 +132,11 @@
       </div>
     </div>
   </main>
+</div>
+
+<div style="position: fixed; bottom: 10px; right: 10px; z-index: 2000; display: flex; gap: 5px;">
+  <button (click)="simularLoginCliente()">Logar Cliente</button>
+  <button (click)="simularLoginVendedor()">Logar Vendedor</button>
+  <button (click)="simularLoginAdmin()">Logar Admin</button>
+  <button (click)="logout($event)">Logout</button>
 </div>

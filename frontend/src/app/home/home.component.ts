@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import { categoriesMocks } from '../Domain/Mocks/Categories.Mocks';
 import { ProdutoService } from '../services/produtos/produto.service';
 
@@ -11,27 +11,78 @@ import { ProdutoService } from '../services/produtos/produto.service';
 export class HomeComponent implements OnInit {
   showCategories = false;
   selectedCategory = 'all';
-  sidebarOpen = false; // Nova propriedade para controlar a sidebar
+  sidebarOpen = false;
 
   products:any = [];
   categories = categoriesMocks;
 
-  constructor(private router: Router,
-      private produtoService: ProdutoService) { }
+  // --- PROPRIEDADES DE AUTENTICAÇÃO ---
 
-  ngOnInit(): void { 
+  isLoggedIn: boolean = false;
+  userName: string = '';
+  userRole: string = '';
+
+  constructor(
+    private router: Router,
+    private produtoService: ProdutoService
+  ) { }
+
+  ngOnInit(): void {
+    const userString = localStorage.getItem('currentUser');
+
+    if (userString) {
+      const user = JSON.parse(userString);
+      this.isLoggedIn = true;
+      this.userName = user.nome;
+      this.userRole = user.role;
+    } else {
+      this.isLoggedIn = false;
+      this.userName = '';
+      this.userRole = 'VISITANTE';
+    }
+
     this.produtoService.listarTodos().subscribe({
-      next: (response) => {
-        this.products = response;
-        console.log('Produtos carregados:', this.products);
-      },
-      error: (error) => {
-        console.error('Erro ao carregar produtos:', error);
-      }
+      next: (response) => { this.products = response; },
+      error: (error) => { console.error('Erro ao carregar produtos:', error); }
     });
-  } 
+  }
 
-  // Métodos existentes
+  logout(event: Event): void {
+    event.preventDefault();
+    localStorage.removeItem('currentUser');
+    this.isLoggedIn = false;
+    this.userName = '';
+    this.userRole = 'VISITANTE';
+    this.closeSidebar();
+    this.router.navigate(['/login']);
+  }
+
+  // --- MÉTODOS DE NAVEGAÇÃO ---
+
+  navigateTo(rota: string, event: Event): void {
+    event.preventDefault();
+    this.router.navigate([rota]);
+    this.closeSidebar();
+  }
+
+  navigateToMinhaConta() {
+    this.router.navigate(['/minha-conta']);
+  }
+
+  navigateToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
+  navigateToRegister(): void {
+    this.router.navigate(['/cadastro']);
+  }
+
+  navigateToCart(): void {
+    console.log('Navegando para o carrinho');
+    this.router.navigate(['/carrinho']);
+  }
+
+  // --- MÉTODOS ORIGINAIS ---
   toggleCategories(): void {
     this.showCategories = !this.showCategories;
   }
@@ -39,51 +90,20 @@ export class HomeComponent implements OnInit {
   selectCategory(categoryId: string, event: Event): void {
     event.preventDefault();
     event.stopPropagation();
-
     this.selectedCategory = categoryId;
     this.showCategories = false;
-
-    console.log('Categoria selecionada:', categoryId);
-
-    if (categoryId === 'all') {
-      this.loadAllProducts();
-    } else {
-      this.filterProductsByCategory(categoryId);
-    }
-  }
-
-  navigateToCart(): void {
-    console.log('Navegando para o carrinho');
-  }
-  
-    navigateToMinhaConta() {
-    this.router.navigate(['/minha-conta']);
   }
 
   searchProducts(searchTerm: string): void {
     if (searchTerm) {
-      console.log('Buscando produtos por termo:', searchTerm);
       this.router.navigate(['/produtos/' + searchTerm]);
     }
-  }
-
-  loadAllProducts(): void {
-    console.log('Carregando todos os produtos');
-  }
-
-  filterProductsByCategory(category: string): void {
-    console.log('Filtrando produtos por categoria:', category);
   }
 
   viewProductDetails(productId: number): void {
     this.router.navigate(['/produto', productId]);
   }
 
-  navigateToLogin(): void {
-    this.router.navigate(['/login']);
-  }
-
-  // Novos métodos para a sidebar
   toggleSidebar(): void {
     this.sidebarOpen = !this.sidebarOpen;
   }
@@ -94,62 +114,27 @@ export class HomeComponent implements OnInit {
 
   navigateToSection(section: string, event: Event): void {
     event.preventDefault();
-    
     console.log('Navegando para seção:', section);
-    
-    // Fechar sidebar após navegar
     this.closeSidebar();
-    
-    // Implementar navegação baseada na seção
-    switch (section) {
-      case 'home':
-        this.router.navigate(['/home']);
-        break;
-      case 'categories':
-        console.log('Navegando para categorias');
-        // this.router.navigate(['/categories']);
-        break;
-      case 'offers':
-        console.log('Navegando para ofertas');
-        // this.router.navigate(['/offers']);
-        break;
-      case 'favorites':
-        console.log('Navegando para favoritos');
-        // this.router.navigate(['/favorites']);
-        break;
-      case 'orders':
-        console.log('Navegando para pedidos');
-        // this.router.navigate(['/orders']);
-        break;
-      case 'profile':
-        console.log('Navegando para perfil');
-        // this.router.navigate(['/profile']);
-        break;
-      case 'settings':
-        console.log('Navegando para configurações');
-        // this.router.navigate(['/settings']);
-        break;
-      case 'help':
-        console.log('Navegando para ajuda');
-        // this.router.navigate(['/help']);
-        break;
-      default:
-        console.log('Seção não encontrada:', section);
-    }
   }
 
-  logout(event: Event): void {
-    event.preventDefault();
-    
-    console.log('Fazendo logout...');
-    
-    // Implementar lógica de logout
-    // Limpar dados do usuário, tokens, etc.
-    
-    // Fechar sidebar
-    this.closeSidebar();
-    
-    // Navegar para login
-    this.router.navigate(['/login']);
+  // --- MÉTODOS PARA SIMULAÇÃO ---
+  simularLoginCliente() {
+    const fakeUser = { nome: 'Álvaro', role: 'CLIENTE' };
+    localStorage.setItem('currentUser', JSON.stringify(fakeUser));
+    window.location.reload();
   }
-}
+
+  // NOVO: Método para simular o login do Vendedor
+  simularLoginVendedor() {
+    const fakeUser = { nome: 'Vendedor', role: 'VENDEDOR' };
+    localStorage.setItem('currentUser', JSON.stringify(fakeUser));
+    window.location.reload();
+  }
+
+  simularLoginAdmin() {
+    const fakeUser = { nome: 'Admin', role: 'ADMIN' };
+    localStorage.setItem('currentUser', JSON.stringify(fakeUser));
+    window.location.reload();
+  }
+} 
