@@ -1,0 +1,65 @@
+<div class="header">
+    <img src="assets/logo.png" alt="CEFET MARKET" class="logo">
+  </div>
+  
+  <div class="title">Lista de Produtos</div>
+  
+
+<div class="container">
+  <table border="1" cellpadding="10">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        <th>Categoria</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produto of produtos"
+      [class.editando]="editandoProdutoId === produto.id">
+        <!-- Nome -->
+        <td *ngIf="editandoProdutoId !== produto.id">{{ produto.nome }}</td>
+        <td *ngIf="editandoProdutoId === produto.id">
+          <input [(ngModel)]="produto.nome">
+        </td>
+  
+        <!-- Preço -->
+        <td *ngIf="editandoProdutoId !== produto.id">R${{ produto.preco.toFixed(2) }}</td>
+        <td *ngIf="editandoProdutoId === produto.id">
+          R$ <input type="number" [(ngModel)]="produto.preco" min="0.01" step="0.01">
+        </td>
+  
+        <!-- Estoque -->
+        <td *ngIf="editandoProdutoId !== produto.id">{{ produto.estoque }}</td>
+        <td *ngIf="editandoProdutoId === produto.id">
+          <input type="number" [(ngModel)]="produto.estoque" min="0">
+        </td>
+  
+        <!-- Categoria -->
+        <td *ngIf="editandoProdutoId !== produto.id">
+          {{ categoriaLabels[produto.categoria] || produto.categoria }}
+        </td>
+        <td *ngIf="editandoProdutoId === produto.id">
+          <select [(ngModel)]="produto.categoria">
+            <option value="" disabled>Selecione uma categoria</option>
+            <option value="livro">Livro</option>
+            <option value="eletronicos">Eletrônicos</option>
+            <option value="material escolar">Material Escolar</option>
+            <option value="item de laboratório">Item de laboratório</option>
+          </select>
+        </td>
+  
+        <!-- Ações -->
+        <td>
+          <button *ngIf="editandoProdutoId !== produto.id" (click)="editar(produto.id)">Editar</button>
+          <button *ngIf="editandoProdutoId === produto.id" (click)="salvar(produto)">Salvar</button>
+          <button *ngIf="editandoProdutoId === produto.id" (click)="cancelar()">Cancelar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="novo-produto" (click)="irParaCadastro()">+ Novo Produto</button>
+  </div>
+  

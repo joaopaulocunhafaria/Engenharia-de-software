@@ -7,7 +7,17 @@
 </div>
 
 <div class="container">
+  <!-- MENSAGEM DE SUCESSO -->
+  <div *ngIf="mensagem && sucesso" class="mensagem sucesso">
+    {{ mensagem }}
+  </div>
+  
+  <div *ngIf="mensagem && erro" class="mensagem erro">
+    {{ mensagem }}
+  </div>
+
   <form [formGroup]="form" class="form-produto">
+    <!-- Nome -->
     <div class="campo" [ngClass]="{'erro': form.get('nome')?.invalid && form.get('nome')?.touched}">
       <label for="nome">Nome do produto</label>
       <input id="nome" formControlName="nome">
@@ -16,6 +26,7 @@
       </small>
     </div>
 
+    <!-- Descrição -->
     <div class="campo" [ngClass]="{'erro': form.get('descricao')?.invalid && form.get('descricao')?.touched}">
       <label for="descricao">Descrição</label>
       <textarea id="descricao" formControlName="descricao"></textarea>
@@ -24,10 +35,11 @@
       </small>
     </div>
 
+    <!-- Preço, Estoque e Categoria -->
     <div class="linha">
       <div class="campo" [ngClass]="{'erro': form.get('preco')?.invalid && form.get('preco')?.touched}">
         <label for="preco">Preço</label>
-        <input type="number" id="preco" formControlName="preco">
+        <input type="number" id="preco" formControlName="preco" min="0.01" step="0.01">
         <small *ngIf="form.get('preco')?.hasError('required') && form.get('preco')?.touched">
           Preço é obrigatório.
         </small>
@@ -62,6 +74,7 @@
       </div>
     </div>
 
+    <!-- Imagem -->
     <div class="campo">
       <label for="imagem">Imagem</label>
       <input type="file" id="imagem" (change)="onFileSelected($event)">

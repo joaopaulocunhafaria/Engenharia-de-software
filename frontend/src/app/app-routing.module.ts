@@ -8,6 +8,7 @@ import { ListagemProdutoComponent } from './listagem-produto/listagem-produto.co
 import { DetalheProdutoComponent } from './detalhe-produto/detalhe-produto.component';
 import { MinhaContaComponent } from './minha-conta/minha-conta.component';
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
+import { EstoqueProdutoComponent } from './estoque-produto/estoque-produto.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'produto/:id', component: DetalheProdutoComponent},
   { path: 'minha-conta', component: MinhaContaComponent},
   { path: 'dados-pessoais', component: DadosPessoaisComponent},
+  { path: 'estoque', component: EstoqueProdutoComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
