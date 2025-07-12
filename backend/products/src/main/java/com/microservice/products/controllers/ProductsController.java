@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.microservice.products.domain.Dto.AuthenticationDTO;
 import com.microservice.products.domain.categories.Categories;
@@ -37,9 +39,8 @@ public class ProductsController {
     private CategoriesService categoriesService;
 
     @GetMapping
-    public ResponseEntity<?> findAll(@RequestBody AuthenticationDTO req) {
-        try {
-            usersProxy.validateToken(req.token());
+    public ResponseEntity<?> findAll() {
+        try { 
 
             List<Products> products = productsService.findAll();
 
@@ -53,9 +54,8 @@ public class ProductsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@RequestBody AuthenticationDTO req, @PathVariable String id) {
-        try {
-            usersProxy.validateToken(req.token());
+    public ResponseEntity<?> findById( @PathVariable String id) {
+        try { 
 
             Products products = productsService.findById(id);
 
@@ -71,17 +71,11 @@ public class ProductsController {
     @PostMapping("/list/{token}")
     public ResponseEntity<?> saveList(@RequestBody List<ProductDTO> products, @PathVariable String token) {
         try {
-
-            usersProxy.validateToken(token);
+ 
             for (ProductDTO product : products) {
 
                 Products productObj = new Products(product);
-                Optional<Categories> category = categoriesService.findById(product.categoryId());
-
-                if (category.isPresent()) {
-                    productObj.setCategory(category.get());
-                }
-
+                
                 productsService.save(productObj);
             }
 
@@ -94,23 +88,29 @@ public class ProductsController {
         }
     }
 
-    @PostMapping("/{token}")
-    public ResponseEntity<?> save(@RequestBody ProductDTO product, @PathVariable String token) {
+    @PostMapping(value="/{token}", consumes = "multipart/form-data")
+    public ResponseEntity<?> save(
+    @RequestParam("title") String title,
+    @RequestParam("description") String description,
+    @RequestParam("ownerId") String ownerId,
+    @RequestParam("category") String categoryId,
+    @RequestParam("price") double price,
+    @RequestParam("image") MultipartFile image, @PathVariable String token) {
         try {
+            
 
-            System.out.println("Saving product: " + product);
-            usersProxy.validateToken(token);
-
-            Products productObj = new Products(product);
-            Optional<Categories> category = categoriesService.findById(product.categoryId());
-
-            if (category.isPresent()) {
-                productObj.setCategory(category.get());
-            }
+            Products productObj = new Products();
+            productObj.setTitle(title);
+            productObj.setDescription(description);
+            productObj.setOwnerId(ownerId);
+            productObj.setImageName(image.getOriginalFilename());
+            productObj.setImage(image.getBytes());
+            productObj.setPrice((long) price);
+            productObj.setCategory(categoryId);
 
             productsService.save(productObj);
 
-            return ResponseEntity.ok().body(product);
+            return ResponseEntity.ok().body(productObj);
 
         } catch (FeignException e) {
             System.out.println("Error: " + e.getMessage());

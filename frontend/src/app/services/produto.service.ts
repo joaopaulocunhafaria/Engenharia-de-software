@@ -7,20 +7,16 @@ import { productsMocks } from '../Domain/Mocks/Products.Mocks';
   providedIn: 'root'
 })
 export class ProdutoService {
-  
-  products = productsMocks;
+   
 
 
   listarTodos(): Observable<any[]> {
-    return of(this.products);
+    return of(productsMocks).pipe(delay(300));
   }
 
   buscarPorTermo(termo: string): Observable<any[]> {
     const termoLower = termo.toLowerCase();
-    const filtrados = this.products.filter(p =>
-      p.title.toLowerCase().includes(termoLower) ||
-      p.description.toLowerCase().includes(termoLower)
-    );
+    const filtrados =  productsMocks;
     return of(filtrados).pipe(delay(300));
   }
 

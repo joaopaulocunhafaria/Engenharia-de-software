@@ -17,15 +17,20 @@ export class ProdutoService {
 
   constructor(private http: HttpClient) { }
 
-  createMock(produto: any, imagem?: File): Observable<any> {
-    // Aqui você pode simular sucesso ou erro, com um pequeno delay para parecer real
-    return of({
-      success: true,
-      message: 'Produto cadastrado com sucesso!'
-    }).pipe(delay(100)); // simula 1s de atraso da API
-  }
+  listarTodos(): Observable<any[]> { 
 
-  createProduto(produto: Produto): Observable<any> {
+    const token = localStorage.getItem('token') ;
+    const headers = { Authorization: `Bearer ${token}` };
+ 
+    return this.http.get<any[]>(productApi + '/products',{headers}).pipe(
+      map((response: any[]) => {
+        console.log('Produtos recebidos do servidor:', response);
+        return response;
+      }),
+      catchError(this.handleErrorlogin) 
+    );
+  }
+  createProduto(produto: any): Observable<any> {
 
     console.log('Produto recebido no serviço:', produto);
 
@@ -36,9 +41,7 @@ export class ProdutoService {
     return this.http.post<{ produtoRes: Produto }>(productApi + '/products/'+token, produto, { headers }).pipe(
 
       map((response => {
-        if (response.produtoRes.token) {
-          localStorage.setItem('token', response.produtoRes.token);
-        }
+        
         return response;
       }),
         catchError(this.handleErrorlogin)

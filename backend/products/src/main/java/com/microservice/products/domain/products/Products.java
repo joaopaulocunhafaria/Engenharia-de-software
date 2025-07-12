@@ -1,5 +1,6 @@
 package com.microservice.products.domain.products;
 
+import java.io.IOException;
 import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,18 @@ public class Products {
     private String id;
     private String title;
     private String description;
-    private String image;
-    private Categories category;
+    private String imageName;
+    
+    private byte[] image;
+    private String category;
     private String ownerId;
     private Long price;
  
-    public Products(ProductDTO productDto){
+    public Products(ProductDTO productDto) throws IOException{
         this.title = productDto.title();
         this.description = productDto.description();
-        this.image = productDto.image();
+        this.imageName = productDto.image().getOriginalFilename();
+        this.image = productDto.image().getBytes();
         this.ownerId = productDto.ownerId();
         this.price = Long.valueOf(productDto.price());
     }
