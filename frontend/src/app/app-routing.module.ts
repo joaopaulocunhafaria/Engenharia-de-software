@@ -32,40 +32,39 @@ const routes: Routes = [
     path: 'minha-conta', 
     component: MinhaContaComponent,
     canActivate: [AuthGuard], // "Segurança" na porta
-    data: { roles: ['CLIENTE', 'VENDEDOR', 'ADMIN'] } // Regra de acesso
+    data: { roles: ['ROLE_USER', 'ROLE_SELLER', 'ROLE_ADMIN'] } // Regra de acesso
   },
   { 
     path: 'dados-pessoais', 
     component: DadosPessoaisComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['CLIENTE', 'VENDEDOR', 'ADMIN'] }
+    data: { roles: ['ROLE_USER', 'ROLE_SELLER', 'ROLE_ADMIN'] }
   },
   { 
     path: 'seus-pedidos', 
     component: SeusPedidosComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['CLIENTE'] }
+    data: { roles: ['ROLE_USER'] }
   },
   { 
     path: 'cadastrar-produto', 
     component: CadastrarProdutoComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['VENDEDOR', 'ADMIN'] }
+    data: { roles: ['ROLE_SELLER', 'ROLE_ADMIN'] }
   },
   { 
     path: 'listagem-produto', 
     component: ListagemProdutoComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['VENDEDOR', 'ADMIN'] }
+    data: { roles: ['ROLE_SELLER', 'ROLE_ADMIN'] }
   },
   { 
     path: 'listagem-usuario', 
     component: ListagemUsuarioComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['ADMIN'] }
+    data: { roles: ['ROLE_ADMIN'] }
   },
-
-  // Rota de fallback sempre por último
+ 
   { path: '**', redirectTo: 'home' }
 ];
 
