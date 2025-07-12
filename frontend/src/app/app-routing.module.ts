@@ -16,7 +16,11 @@ import { DetalheProdutoComponent } from './detalhe-produto/detalhe-produto.compo
 import { MinhaContaComponent } from './minha-conta/minha-conta.component';
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 import { SeusPedidosComponent } from './seus-pedidos/seus-pedidos.component';
+<<<<<<< HEAD
+import { CheckoutComponent } from './checkout/checkout.component';
+=======
 import { ListagemUsuarioComponent } from './listagem-usuario/listagem-usuario.component';
+>>>>>>> 2b4ec39637e9d243546012f64ed9e0c0e24a44de
 
 const routes: Routes = [
   // --- Rotas Públicas ---
@@ -26,6 +30,15 @@ const routes: Routes = [
   { path: 'cadastro', component: CadastroUsuarioComponent },
   { path: 'produto/:id', component: DetalheProdutoComponent },
   { path: 'detalhe', component: DetalheProdutoComponent },
+<<<<<<< HEAD
+  { path: 'listagem-produto', component: ListagemProdutoComponent},
+  { path: 'produto/:id', component: DetalheProdutoComponent},
+  { path: 'minha-conta', component: MinhaContaComponent},
+  { path: 'dados-pessoais', component: DadosPessoaisComponent},
+  { path: 'seus-pedidos', component: SeusPedidosComponent},
+  { path: 'checkout', component: CheckoutComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // redirecionamento padrão
+=======
 
   // --- Rotas Protegidas ---
   { 
