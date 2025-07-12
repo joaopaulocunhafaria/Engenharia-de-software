@@ -1,0 +1,71 @@
+<header class="header">
+  <div class="logo">
+    <i class="fa-solid fa-cart-shopping"></i>
+    CEFET MARKET
+  </div>
+</header>
+
+<div class="container">
+  <div class="checkout-layout">
+
+    <main class="main-content">
+      <div class="cart-table">
+        <div class="cart-header">
+          <div class="col-product">Produto</div>
+          <div class="col-price">Preço Unitário</div>
+          <div class="col-quantity">Quantidade</div>
+        </div>
+
+        <div class="panel">
+          <div *ngFor="let item of itens" class="cart-item">
+            <div class="product-details">
+              <img *ngIf="item.imagem" [src]="item.imagem" [alt]="item.nome" />
+              <span>{{ item.nome }}</span>
+            </div>
+            <div class="unit-price">R$ {{ item.preco | number:'1.2-2' }}</div>
+            <div class="quantity-selector">
+              <button (click)="menos(item)" class="quantity-minus">−</button>
+              <input type="text" [value]="item.quantidade" readonly />
+              <button (click)="mais(item)" class="quantity-plus">+</button>
+            </div>
+            <i (click)="remover(item)" class="fa-solid fa-trash-can remove-item" title="Remover item"></i>
+          </div>
+
+          <div *ngIf="itens.length === 0" class="empty-cart-message">
+            <p>Seu carrinho está vazio.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel delivery-address">
+        <h3>
+          <i class="fa-solid fa-house"></i>
+          Endereço de Entrega
+        </h3>
+        <div class="address-info">
+          <p>{{ endereco.rua }}</p>
+          <p>{{ endereco.cidade }}</p>
+          <p><strong>Destinatário:</strong> {{ endereco.destinatario }}</p>
+        </div>
+      </div>
+    </main>
+
+    <aside class="sidebar">
+      <div class="panel order-summary">
+        <h3>Resumo de Pedidos:</h3>
+        <div class="summary-items-container">
+          <div *ngFor="let item of itens" class="summary-item">
+            <span>{{ item.quantidade }}x {{ item.nome }}</span>
+            <span>R$ {{ (item.preco * item.quantidade) | number:'1.2-2' }}</span>
+          </div>
+        </div>
+        <div class="summary-total">
+          <span>Total:</span>
+          <span>R$ {{ total | number:'1.2-2' }}</span>
+        </div>
+        <button (click)="comprar()" class="buy-button" [disabled]="itens.length === 0">Comprar agora</button>
+      </div>
+    </aside>
+
+  </div>
+</div>

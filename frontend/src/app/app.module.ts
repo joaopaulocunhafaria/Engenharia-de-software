@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { ListagemProdutoComponent } from './listagem-produto/listagem-produto.co
 import { MinhaContaComponent } from './minha-conta/minha-conta.component';
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 import { SeusPedidosComponent } from './seus-pedidos/seus-pedidos.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { SeusPedidosComponent } from './seus-pedidos/seus-pedidos.component';
     MinhaContaComponent,
     DadosPessoaisComponent,
     SeusPedidosComponent,
+    CheckoutComponent,
 
   ],
   imports: [
