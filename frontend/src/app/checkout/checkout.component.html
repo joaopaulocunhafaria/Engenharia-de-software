@@ -19,13 +19,13 @@
         <div class="panel">
           <div *ngFor="let item of itens" class="cart-item">
             <div class="product-details">
-              <img *ngIf="item.imagem" [src]="item.imagem" [alt]="item.nome" />
-              <span>{{ item.nome }}</span>
+              <img *ngIf="item.image" [src]="'data:image/jpeg;base64,' +item.image"   [alt]="item.title" />
+              <span>{{ item.title }}</span>
             </div>
-            <div class="unit-price">R$ {{ item.preco | number:'1.2-2' }}</div>
+            <div class="unit-price">R$ {{ item.price | number:'1.2-2' }}</div>
             <div class="quantity-selector">
               <button (click)="menos(item)" class="quantity-minus">−</button>
-              <input type="text" [value]="item.quantidade" readonly />
+              <input type="text" [value]="item.quantityInCart" readonly />
               <button (click)="mais(item)" class="quantity-plus">+</button>
             </div>
             <i (click)="remover(item)" class="fa-solid fa-trash-can remove-item" title="Remover item"></i>
@@ -43,9 +43,8 @@
           Endereço de Entrega
         </h3>
         <div class="address-info">
-          <p>{{ endereco.rua }}</p>
-          <p>{{ endereco.cidade }}</p>
-          <p><strong>Destinatário:</strong> {{ endereco.destinatario }}</p>
+          <p>{{ user.endereco }}</p> 
+          <p><strong>Destinatário:</strong> {{ user.name }}</p>
         </div>
       </div>
     </main>
@@ -55,9 +54,9 @@
         <h3>Resumo de Pedidos:</h3>
         <div class="summary-items-container">
           <div *ngFor="let item of itens" class="summary-item">
-            <span>{{ item.quantidade }}x {{ item.nome }}</span>
-            <span>R$ {{ (item.preco * item.quantidade) | number:'1.2-2' }}</span>
-          </div>
+            <span>{{ item.quantityInCart }}x {{ item.title }}</span>
+            <span>R$ {{ (item.price * item.quantityInCart) | number:'1.2-2' }}</span>
+          </div>  
         </div>
         <div class="summary-total">
           <span>Total:</span>

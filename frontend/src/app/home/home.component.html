@@ -36,10 +36,23 @@
             <i class="fas fa-th"></i>
             Todas as categorias
           </a>
-          <a href="#" class="category-item" (click)="selectCategory('livros', $event)">
+          <a href="#" class="category-item" (click)="selectCategory('livro', $event)">
             <i class="fas fa-book"></i>
-            Livros
+            Livro
           </a>
+           <a href="#" class="category-item" (click)="selectCategory('eletronicos', $event)">
+            <i class="fas fa-book"></i>
+            eletronicos
+          </a>
+           <a href="#" class="category-item" (click)="selectCategory('material escolar', $event)">
+            <i class="fas fa-book"></i>
+            material escolar
+          </a>
+           <a href="#" class="category-item" (click)="selectCategory('item de laboratório', $event)">
+            <i class="fas fa-book"></i>
+            item de laboratório
+          </a>
+         
         </div>
       </div>
 
@@ -70,11 +83,11 @@
 
     <nav class="sidebar-nav">
 
-      <a *ngIf="userRole === 'VISITANTE' || userRole === 'CLIENTE'" href="#" class="nav-item" (click)="navigateTo('/ofertas', $event)">
+      <a *ngIf="userRole === 'VISITANTE' || userRole === 'ROLE_USER'" href="#" class="nav-item" (click)="navigateTo('/ofertas', $event)">
         <i class="fas fa-tag"></i>
         <span>Ofertas</span>
       </a>
-      <a *ngIf="userRole === 'VISITANTE' || userRole === 'CLIENTE'" href="#" class="nav-item" (click)="navigateTo('/configuracoes', $event)">
+      <a *ngIf="userRole === 'VISITANTE' || userRole === 'ROLE_USER'" href="#" class="nav-item" (click)="navigateTo('/configuracoes', $event)">
         <i class="fas fa-cog"></i>
         <span>Configurações</span>
       </a>
@@ -84,29 +97,29 @@
         <span>Minha Conta</span>
       </a>
 
-      <a *ngIf="userRole === 'CLIENTE'" href="#" class="nav-item" (click)="navigateTo('/minhas-compras', $event)">
+      <a *ngIf="userRole === 'ROLE_USER'" href="#" class="nav-item" (click)="navigateTo('/minhas-compras', $event)">
         <i class="fas fa-box"></i>
         <span>Minhas Compras</span>
       </a>
-      <a *ngIf="userRole === 'CLIENTE'" href="#" class="nav-item" (click)="navigateTo('/carrinho', $event)">
+      <a *ngIf="userRole === 'ROLE_USER'" href="#" class="nav-item" (click)="navigateTo('/carrinho', $event)">
         <i class="fas fa-shopping-cart"></i>
         <span>Carrinho</span>
       </a>
 
-      <a *ngIf="userRole === 'VENDEDOR'" href="#" class="nav-item" (click)="navigateTo('/cadastrar-produto', $event)">
+      <a *ngIf="userRole === 'ROLE_SELLER'" href="#" class="nav-item" (click)="navigateTo('/cadastrar-produto', $event)">
         <i class="fas fa-plus-circle"></i>
         <span>Cadastrar Produto</span>
       </a>
-      <a *ngIf="userRole === 'VENDEDOR'" href="#" class="nav-item" (click)="navigateTo('/editar-produto', $event)">
+      <a *ngIf="userRole === 'ROLE_SELLER'" href="#" class="nav-item" (click)="navigateTo('/editar-produto', $event)">
         <i class="fas fa-edit"></i>
         <span>Editar Produto</span>
       </a>
 
-      <a *ngIf="userRole === 'ADMIN'" href="#" class="nav-item" (click)="navigateTo('/cadastrar-usuario', $event)">
+      <a *ngIf="userRole === 'ROLE_ADMIN'" href="#" class="nav-item" (click)="navigateTo('/cadastrar-usuario', $event)">
         <i class="fas fa-user-plus"></i>
         <span>Cadastrar Usuário</span>
       </a>
-      <a *ngIf="userRole === 'ADMIN'" href="#" class="nav-item" (click)="navigateTo('/editar-usuario', $event)">
+      <a *ngIf="userRole === 'ROLE_ADMIN'" href="#" class="nav-item" (click)="navigateTo('/editar-usuario', $event)">
         <i class="fas fa-user-edit"></i>
         <span>Editar Usuário</span>
       </a>
@@ -124,7 +137,7 @@
     <h1 class="products-title">Produtos</h1>
     
     <div class="produtos">
-      <div class="card" *ngFor="let p of products" (click)="viewProductDetails(p.id)">
+      <div class="card" *ngFor="let p of filteredProducts" (click)="viewProductDetails(p.id)">
         <img [src]="'data:image/jpeg;base64,' + p.image"  alt="Imagem do produto" />
         <h3>{{ p.title }}</h3>
         <p>{{ p.description }}</p>
@@ -132,11 +145,4 @@
       </div>
     </div>
   </main>
-</div>
-
-<div style="position: fixed; bottom: 10px; right: 10px; z-index: 2000; display: flex; gap: 5px;">
-  <button (click)="simularLoginCliente()">Logar Cliente</button>
-  <button (click)="simularLoginVendedor()">Logar Vendedor</button>
-  <button (click)="simularLoginAdmin()">Logar Admin</button>
-  <button (click)="logout($event)">Logout</button>
 </div>

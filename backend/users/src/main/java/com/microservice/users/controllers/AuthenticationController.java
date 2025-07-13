@@ -55,8 +55,10 @@ public class AuthenticationController {
                 .findFirst()
                 .map(GrantedAuthority::getAuthority)
                 .orElse("ROLE_USER");
-                
-        return ResponseEntity.ok(new LoginResponseDTO(token, firstRole));
+        
+        User user = userRepository.findByEmail(authenticationDto.email());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token, firstRole, user.getName(),user.getId()));
     }
 
     @PostMapping("/register")

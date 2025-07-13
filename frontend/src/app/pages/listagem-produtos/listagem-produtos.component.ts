@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { categoriesMocks } from 'src/app/Domain/Mocks/Categories.Mocks';
-import { productsMocks } from 'src/app/Domain/Mocks/Products.Mocks';
-import { ProdutoService } from 'src/app/services/produto.service';
+import { productsMocks } from 'src/app/Domain/Mocks/Products.Mocks'; 
 
 @Component({
   selector: 'app-listagem-produtos',
@@ -25,8 +24,7 @@ export class ListagemProdutosComponent implements OnInit {
 
   constructor(
     private router:Router,
-    private route: ActivatedRoute,
-    private produtoService: ProdutoService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -37,19 +35,7 @@ export class ListagemProdutosComponent implements OnInit {
   }
 
   buscarProdutos(): void {
-    this.carregando = true;
-
-    if (this.termoBusca) {
-      this.produtoService.buscarPorTermo(this.termoBusca).subscribe(produtos => {
-        this.produtos = produtos;
-        this.carregando = false;
-      });
-    } else {
-      this.produtoService.listarTodos().subscribe(produtos => {
-        this.produtos = produtos;
-        this.carregando = false;
-      });
-    }
+    
   }
 
 

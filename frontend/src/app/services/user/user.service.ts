@@ -83,4 +83,17 @@ export class UserService {
       return throwError(  Error(errorMessage));
     }
     
+
+    getById(id: string): Observable<any> {
+      const token = this.getToken();
+      const headers = { Authorization: `Bearer ${token}` };
+
+      return this.http.get<any>(`${userApi}/users/${id}`, { headers }).pipe(
+        map(response => { 
+          console.log('Usuário recebido do servidor:', response);
+          return response;
+        }),
+        catchError(this.handleErrorlogin)
+      );
+    }
 }

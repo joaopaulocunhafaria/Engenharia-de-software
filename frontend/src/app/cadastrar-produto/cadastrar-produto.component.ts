@@ -46,14 +46,18 @@ export class CadastrarProdutoComponent implements OnInit {
     if (this.imagemSelecionada) {
       formData.append('image', this.imagemSelecionada); // tipo: File
     }
+    const sellerId = localStorage.getItem('id') || ''; // obtém o ID do vendedor logado
     formData.append('title', produto.nome);
     formData.append('description', produto.descricao);
-    formData.append('ownerId', "3");
+    formData.append('ownerId', sellerId ); // substitua por um ID válido
     formData.append('category', produto.categoria);
     formData.append('price', produto.preco.toString());
+    formData.append('quantity', produto.estoque.toString());
+    console.log('Dados do produto:', formData);
     this.produtoService.createProduto(formData).subscribe({
       next: (response) => {
         console.log('Produto cadastrado com sucesso:', response);
+        window.location.href = '/';
       },
       error: (error) => {
         console.error('Erro ao cadastrar produto:', error);

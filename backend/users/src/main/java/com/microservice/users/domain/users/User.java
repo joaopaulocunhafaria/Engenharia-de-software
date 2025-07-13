@@ -34,6 +34,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private UserRole role;
+    private String endereco;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -44,8 +45,9 @@ public class User implements UserDetails {
                     new SimpleGrantedAuthority("ROLE_SELLER"));
         } else if (this.role == UserRole.SELLER) {
             return List.of(
-                    new SimpleGrantedAuthority("ROLE_USER"),
-                    new SimpleGrantedAuthority("ROLE_SELLER"));
+                new SimpleGrantedAuthority("ROLE_SELLER"),
+                    new SimpleGrantedAuthority("ROLE_USER"));
+
         } else {
             return List.of(new SimpleGrantedAuthority("ROLE_USER"));
         }

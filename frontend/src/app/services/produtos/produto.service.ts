@@ -48,4 +48,16 @@ export class ProdutoService {
 
       ));
   }
+
+  getById(id: string | null): Observable<any> {
+    const token = localStorage.getItem('token') || '';
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<any>(`${productApi}/products/${id}`, { headers }).pipe(
+      map((response: any) => {
+        console.log('Produto recebido do servidor:', response);
+        return response;
+      }),
+      catchError(this.handleErrorlogin)
+    );
+  }  
 }

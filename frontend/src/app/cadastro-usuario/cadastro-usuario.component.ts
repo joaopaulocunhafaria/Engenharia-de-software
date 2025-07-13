@@ -53,8 +53,9 @@ export class CadastroUsuarioComponent implements OnInit {
       name: this.f.nome.value,
       email: this.f.email.value,
       password: this.f.senha.value,
-      role: 'USER'
-    };
+      role: 'SELLER',
+      endereco: this.f.endereco.value
+    };  
 
     this.userService.createUser(userPayload).subscribe({
       next: () => {

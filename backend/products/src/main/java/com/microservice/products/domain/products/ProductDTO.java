@@ -9,5 +9,6 @@ public record ProductDTO(
         MultipartFile image,
         String ownerId,
         String categoryId,
-        String price) {
+        String price,
+        Integer quantity) {
 }

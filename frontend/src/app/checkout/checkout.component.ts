@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CarrinhoService, CarrinhoItem } from '../services/carrinho.service';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-checkout',
@@ -9,6 +10,8 @@ import { CarrinhoService, CarrinhoItem } from '../services/carrinho.service';
 export class CheckoutComponent implements OnInit {
   itens: CarrinhoItem[] = [];
   total = 0;
+  userId:any;
+  user:any;
 
   endereco = {
     rua: 'Rua do Cliente, 1910 - Bairro do Cliente',
@@ -16,52 +19,46 @@ export class CheckoutComponent implements OnInit {
     destinatario: 'nome_usuario'
   };
 
-  constructor(private carrinho: CarrinhoService) {}
+  constructor(private carrinho: CarrinhoService, private userService:UserService) {}
 
   ngOnInit(): void {
-  this.itens = [
-    {
-      id: 1,
-      nome: 'Pão de Queijo (500g)',
-      preco: 20.00,
-      quantidade: 2,
-      imagem: 'https://via.placeholder.com/80?text=Pão+de+Queijo'
-    },
-    {
-      id: 2,
-      nome: 'Café Especial (250g)',
-      preco: 30.00,
-      quantidade: 1,
-      imagem: 'https://via.placeholder.com/80?text=Café'
-    },
-    {
-      id: 3,
-      nome: 'Doce de Leite (400g)',
-      preco: 18.50,
-      quantidade: 1,
-      imagem: 'https://via.placeholder.com/80?text=Doce+de+Leite'
-    }
-  ];
+    this.userId = localStorage.getItem('id');
 
+    this.carrinho.getByUserId(this.userId).subscribe({
+      next: (response:any) => {
+        console.log('Itens do carrinho recebidos:', response); 
+        this.itens = response;
+        this.total = this.calcularTotal()
+      },
+      error: (error:any) => {
+        console.error('Erro ao carregar itens do carrinho:', error);
+        this.itens = [];
+        this.total = 0;
+      }
+    });
+
+   this.userService.getById(this.userId).subscribe({
+      next: (response:any) => {
+        this.user = response;
+        console.log('Dados do usuário recebidos:', this.user);
+      },
+      error: (error:any) => { 
+        console.error('Erro ao carregar dados do usuário:', error);
+        this.user = null;  
+      }
+    });
   // Atualiza o total automaticamente
-  this.total = this.itens.reduce((soma, item) => soma + item.preco * item.quantidade, 0);
+  this.total = this.itens.reduce((soma, item) => soma + item.price * item.quantity, 0);
 }
 
+comprar(): void {}
 
-  mais(item: CarrinhoItem) {
-    this.carrinho.updateQuantidade(item.id, 1);
-  }
+mais(item:any){}
 
-  menos(item: CarrinhoItem) {
-    this.carrinho.updateQuantidade(item.id, -1);
-  }
+remover(item:any): void {}
+menos(item:any): void {}
 
-  remover(item: CarrinhoItem) {
-    this.carrinho.removeItem(item.id);
-  }
-
-  comprar() {
-    alert('Compra finalizada com sucesso!');
-    this.carrinho.clear();
+calcularTotal(): number {
+    return this.itens.reduce((soma, item) => soma + item.price * item.quantityInCart, 0);
   }
 }

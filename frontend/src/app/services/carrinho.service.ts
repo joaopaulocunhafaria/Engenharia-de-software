@@ -1,55 +1,51 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export interface CarrinhoItem {
   id: number;
-  nome: string;
-  preco: number;
-  quantidade: number;
-  imagem?: string;
+  title: string;
+  price: number;
+  quantity: number;
+  quantityInCart: number;
+  image?: any;
 }
+
+
+
+export interface Product {
+  id: string;
+  title: string;
+  description: string;
+  imageName: string;
+  image: any; 
+  category: string;
+  ownerId: string;
+  price: number;
+  quantity: number;
+}
+
+
 
 @Injectable({ providedIn: 'root' })
 export class CarrinhoService {
-  private itensSubject = new BehaviorSubject<CarrinhoItem[]>([]);
-  itens$ = this.itensSubject.asObservable();
+  apiroute = 'http://localhost:8080/carrinho'; 
 
-  addItem(item: CarrinhoItem) {
-    const itens = [...this.itensSubject.value];
-    const index = itens.findIndex(i => i.id === item.id);
-    if (index >= 0) {
-      itens[index].quantidade += item.quantidade;
-    } else {
-      itens.push(item);
+  constructor(private http: HttpClient) {} 
+ 
+  getByUserId(userId: string) {
+    console.log('Buscando itens do carrinho para o usuário:', userId);
+    return this.http.get<CarrinhoItem[]>(`${this.apiroute}/user/${userId}`);
+  }
+
+  addItem(userId: string, itemId: String,quantity: number): any {
+    console.log('Adicionando item ao carrinho:', itemId);
+
+    const payload ={
+      userId: userId,
+      productId: itemId,
+      quantity: quantity
     }
-    this.itensSubject.next(itens);
-  }
-
-  updateQuantidade(id: number, delta: number) {
-    const itens = this.itensSubject.value.map(i => {
-      if (i.id === id) {
-        const nova = i.quantidade + delta;
-        return { ...i, quantidade: nova > 0 ? nova : 1 };
-      }
-      return i;
-    });
-    this.itensSubject.next(itens);
-  }
-
-  removeItem(id: number) {
-    const itens = this.itensSubject.value.filter(i => i.id !== id);
-    this.itensSubject.next(itens);
-  }
-
-  clear() {
-    this.itensSubject.next([]);
-  }
-
-  getTotal(): number {
-    return this.itensSubject.value.reduce((acc, i) => acc + i.preco * i.quantidade, 0);
-  }
-
-  getItens(): CarrinhoItem[] {
-    return this.itensSubject.value;
+    return this.http.post<CarrinhoItem>(`${this.apiroute}`, payload );
   }
 }

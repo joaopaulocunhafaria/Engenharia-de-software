@@ -95,6 +95,7 @@ public class ProductsController {
     @RequestParam("ownerId") String ownerId,
     @RequestParam("category") String categoryId,
     @RequestParam("price") double price,
+    @RequestParam("quantity") Integer quantity,
     @RequestParam("image") MultipartFile image, @PathVariable String token) {
         try {
             
@@ -107,6 +108,7 @@ public class ProductsController {
             productObj.setImage(image.getBytes());
             productObj.setPrice((long) price);
             productObj.setCategory(categoryId);
+            productObj.setQuantity(quantity);  
 
             productsService.save(productObj);
 

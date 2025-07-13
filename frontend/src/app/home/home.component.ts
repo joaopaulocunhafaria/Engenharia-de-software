@@ -6,14 +6,15 @@ import { ProdutoService } from '../services/produtos/produto.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   showCategories = false;
   selectedCategory = 'all';
   sidebarOpen = false;
 
-  products:any = [];
+  products: any = [];
+  filteredProducts: any = [];
   categories = categoriesMocks;
 
   // --- PROPRIEDADES DE AUTENTICAÇÃO ---
@@ -22,10 +23,7 @@ export class HomeComponent implements OnInit {
   userName: string = '';
   userRole: string = '';
 
-  constructor(
-    private router: Router,
-    private produtoService: ProdutoService
-  ) { }
+  constructor(private router: Router, private produtoService: ProdutoService) {}
 
   ngOnInit(): void {
     const userString = localStorage.getItem('currentUser');
@@ -42,8 +40,13 @@ export class HomeComponent implements OnInit {
     }
 
     this.produtoService.listarTodos().subscribe({
-      next: (response) => { this.products = response; },
-      error: (error) => { console.error('Erro ao carregar produtos:', error); }
+      next: (response) => {
+        this.products = response;
+        this.filteredProducts = response;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar produtos:', error);
+      },
     });
   }
 
@@ -91,13 +94,36 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.selectedCategory = categoryId;
+
+    this.filteredProducts = this.products.filter((product: any) => {
+      const matchesCategory =
+        categoryId === 'all' || product.category === categoryId;
+      return matchesCategory;
+    });
+
+    if (this.filteredProducts.length === 0) {
+      this.filteredProducts = this.products;
+    }
+
     this.showCategories = false;
   }
 
   searchProducts(searchTerm: string): void {
-    if (searchTerm) {
-      this.router.navigate(['/produtos/' + searchTerm]);
-    }
+    const term = searchTerm.toLowerCase().trim();
+
+    this.filteredProducts = this.products.filter((product: any) => {
+      const matchesTerm = product.title?.toLowerCase().includes(term);
+      const matchesCategory =
+        this.selectedCategory === 'all' ||
+        product.category === this.selectedCategory;
+
+      return matchesTerm && matchesCategory;
+    });
+  
+  
+      if (this.filteredProducts.length === 0) {
+        this.filteredProducts = this.products;
+      }
   }
 
   viewProductDetails(productId: number): void {
@@ -117,24 +143,4 @@ export class HomeComponent implements OnInit {
     console.log('Navegando para seção:', section);
     this.closeSidebar();
   }
-
-  // --- MÉTODOS PARA SIMULAÇÃO ---
-  simularLoginCliente() {
-    const fakeUser = { nome: 'Álvaro', role: 'CLIENTE' };
-    localStorage.setItem('currentUser', JSON.stringify(fakeUser));
-    window.location.reload();
-  }
-
-  // NOVO: Método para simular o login do Vendedor
-  simularLoginVendedor() {
-    const fakeUser = { nome: 'Vendedor', role: 'VENDEDOR' };
-    localStorage.setItem('currentUser', JSON.stringify(fakeUser));
-    window.location.reload();
-  }
-
-  simularLoginAdmin() {
-    const fakeUser = { nome: 'Admin', role: 'ADMIN' };
-    localStorage.setItem('currentUser', JSON.stringify(fakeUser));
-    window.location.reload();
-  }
-} 
+}

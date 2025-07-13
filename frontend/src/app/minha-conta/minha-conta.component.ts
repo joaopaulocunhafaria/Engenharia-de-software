@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user/user.service';
+
+
+interface Seller{
+  id: number;
+  name: string;
+  email: string;
+  endereco: string;
+}
 
 @Component({
   selector: 'app-minha-conta',
@@ -8,14 +17,23 @@ import { Router } from '@angular/router';
 })
 export class MinhaContaComponent implements OnInit {
 
-  usuario = {
-    nome: 'nome_usuario',
-    email: 'nome_usuario@email.com'
-  };
+  usuario:any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
+
+      this.userService.getById(localStorage.getItem('id') || '').subscribe({
+        next: (response) => {
+          this.usuario = response;
+          console.log('Dados do usuário recebidos:', this.usuario);
+        }
+        , error: (error) => {
+          console.error('Erro ao carregar dados do usuário:', error);
+          this.usuario = null;  
+        }
+      });
+
   }
 
   logout() {

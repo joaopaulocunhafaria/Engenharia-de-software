@@ -15,13 +15,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-@Document(collection = "products")
+ 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Products {
+public class ProductRes {
 
     @Autowired
     private CategoriesService service;
@@ -37,8 +36,9 @@ public class Products {
     private String ownerId;
     private Long price;
     private Integer quantity;
+    private Integer quantityInCart;
  
-    public Products(ProductDTO productDto) throws IOException{
+    public ProductRes(ProductDTO productDto) throws IOException{
         this.title = productDto.title();
         this.description = productDto.description();
         this.imageName = productDto.image().getOriginalFilename();
@@ -47,6 +47,19 @@ public class Products {
         this.price = Long.valueOf(productDto.price());
         this.quantity = productDto.quantity();
     }
+
+    public ProductRes(Products product) {
+        this.id = product.getId();
+        this.title = product.getTitle();
+        this.description = product.getDescription();
+        this.imageName = product.getImageName();
+        this.image = product.getImage();
+        this.category = product.getCategory();
+        this.ownerId = product.getOwnerId();
+        this.price = product.getPrice();
+        this.quantity = product.getQuantity();
+    }
+    
  
 
     

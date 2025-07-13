@@ -1,5 +1,6 @@
 package com.microservice.products.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.microservice.products.domain.Dto.AuthenticationDTO;
 import com.microservice.products.domain.Dto.Carrinho;
+import com.microservice.products.domain.products.ProductRes;
+import com.microservice.products.domain.products.Products;
 import com.microservice.products.proxy.UsersProxy;
 import com.microservice.products.services.CarrinhoService;
+import com.microservice.products.services.ProductsService;
 
 import feign.FeignException;
 
@@ -30,6 +34,9 @@ public class CarrinhoController {
 
     @Autowired
     private UsersProxy usersProxy;
+
+    @Autowired
+    private ProductsService productsService;
 
     @GetMapping
     public ResponseEntity<?> findAll() {
@@ -136,7 +143,13 @@ public class CarrinhoController {
     public ResponseEntity<?> findByUserId(@PathVariable String userId) {
         try {
             List<Carrinho> carrinhos = carrinhoService.findByUserId(userId);
-            return ResponseEntity.ok(carrinhos);
+            List<ProductRes> products = new ArrayList<ProductRes>(); 
+            for (Carrinho carrinho : carrinhos) {
+                ProductRes res = new ProductRes(productsService.findById(carrinho.getProductId()));
+                res.setQuantityInCart(carrinho.getQuantity());
+                products.add(res); 
+            }
+            return ResponseEntity.ok(products);
         } catch (FeignException e) {
             return ResponseEntity.badRequest().body("Token inválido");
         } catch (Exception e) {
