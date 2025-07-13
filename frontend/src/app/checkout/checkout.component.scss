@@ -21,14 +21,57 @@
 
 /* Cabeçalho */
 .header {
-  background-color: var(--primary-blue);
-  padding: 15px 30px;
-  color: var(--text-light);
+  background-color: #264699;
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+}
+
+/* Define largura igual para os 3 blocos (esquerda, centro, direita) */
+.left,
+.center,
+.right {
+  flex: 1;
   display: flex;
   align-items: center;
-  font-size: 24px;
-  font-weight: 700;
+  justify-content: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
   gap: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white !important;
+  text-decoration: none !important;
+  font-weight: bold !important;
+
+  i {
+    font-size: 24px;
+  }
+}
+
+/* Estilo da logo */
+.logo {
+  cursor: pointer;
+  height: 60px;
+  width: auto;
+}
+
+.logo-link {
+  display: inline-block;
+}
+
+/* Estilo do botão do carrinho */
+.cart {
+  color: white !important;;
+  text-decoration: none !important;;
+  font-weight: bold !important;;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .checkout-layout {

@@ -1,12 +1,7 @@
-// app-routing.module.ts (CORRIGIDO E PROTEGIDO)
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-// 1. IMPORTE O GUARD
 import { AuthGuard } from './auth.guard';
 
-// Importe seus componentes
 import { LoginClientComponent } from './login-client/login-client.component';
 import { HomeComponent } from './home/home.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
@@ -20,7 +15,6 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ListagemUsuarioComponent } from './listagem-usuario/listagem-usuario.component';
 
 const routes: Routes = [
-  // --- Rotas Públicas ---
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginClientComponent },
@@ -42,8 +36,8 @@ const routes: Routes = [
     canActivate: [AuthGuard], // "Segurança" na porta
     data: { roles: ['ROLE_USER', 'ROLE_SELLER', 'ROLE_ADMIN'] } // Regra de acesso
   },
-  { 
-    path: 'dados-pessoais', 
+  {
+    path: 'dados-pessoais',
     component: DadosPessoaisComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_USER', 'ROLE_SELLER', 'ROLE_ADMIN'] }
@@ -60,14 +54,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_SELLER', 'ROLE_ADMIN'] }
   },
-  { 
-    path: 'listagem-produto', 
+
+  {
+    path: 'listagem-produto',
     component: ListagemProdutoComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_SELLER', 'ROLE_ADMIN'] }
   },
-  { 
-    path: 'listagem-usuario', 
+  {
+    path: 'listagem-usuario',
     component: ListagemUsuarioComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_ADMIN'] }

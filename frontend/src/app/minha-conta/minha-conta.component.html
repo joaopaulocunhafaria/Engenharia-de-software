@@ -1,10 +1,28 @@
-<header>
-  <div class="logo">
-      <a [routerLink]="['/home']" class="logo-link">
-          <img src="assets/logo.png" alt="CEFET MARKET Logo">
+<header class="header">
+  <div class="header-content">
+    
+    <!-- Espaço esquerdo (pode estar vazio ou ter usuário) -->
+    <div class="left">
+      <a routerLink="/minha-conta" class="user-info">
+          <i class="username"></i> Minha Conta
+        </a>
+    </div>
+
+    <!-- Logo central -->
+    <div class="center">
+      <a routerLink="/" class="logo-link">
+        <img src="assets/logo.png" alt="CEFET MARKET" class="logo">
       </a>
+    </div>
+
+    <!-- Carrinho à direita -->
+    <div class="right">
+      <a routerLink="/checkout" class="cart">
+        <i class="fas fa-shopping-cart"></i> Carrinho
+      </a>
+    </div>
   </div>
-  </header>
+</header>
 
 <div class="minha-conta-container">
     <div class="user-header">

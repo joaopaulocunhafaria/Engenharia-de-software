@@ -24,42 +24,59 @@
   }
   
   /* Estilos do Cabeçalho (copiado para consistência) */
-  header {
-      background: #264699;
-      color:white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      width: 100%;
+  /* Header principal com logo centralizada */
+  .header {
+    background-color: #264699;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Define largura igual para os 3 blocos (esquerda, centro, direita) */
+  .left,
+  .center,
+  .right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;                // Corrige a cor azul
+    text-decoration: none;       // Remove sublinhado
+    font-weight: bold;
+  
+    i {
+      font-size: 24px;
+    }
+  }
+  
+  /* Estilo da logo */
+  .logo {
+    cursor: pointer;
+    height: 60px;
+    width: auto;
   }
   
   .logo-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: white;
-      cursor: pointer;
+    display: inline-block;
   }
   
-  .logo-link img {
-      height: 40px;
-  }
-  
-  .logo-link h1 {
-      font-size: 18px;
-      line-height: 1.2;
-      margin: 0;
-  }
-  
-  .cart{
-      color:white;
-      text-decoration: none;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+  /* Estilo do botão do carrinho */
+  .cart {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
   
   /* Estilos da Caixa de Dados Pessoais */

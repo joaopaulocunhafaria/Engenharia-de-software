@@ -21,40 +21,58 @@ body {
 /* ------------------------------------- */
 /* CABEÇALHO (HEADER) */
 /* ------------------------------------- */
-header {
-  background: #264699; /* Azul do CEFET MARKET */
+.header {
+  background-color: #264699;
   color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px; /* Padding interno para o conteúdo do header */
-  width: 100%; /* Garante que o header ocupe toda a largura */
-  margin-bottom: 20px; /* Espaço abaixo do cabeçalho */
+  text-align: center;
+  padding: 15px 20px;
+  margin-bottom: 20px;
 }
 
+/* Define largura igual para os 3 blocos (esquerda, centro, direita) */
+.left,
+.center,
+.right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;                // Corrige a cor azul
+  text-decoration: none;       // Remove sublinhado
+  font-weight: bold;
+
+  i {
+    font-size: 24px;
+  }
+}
+
+/* Estilo da logo */
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Espaço entre a imagem do logo e o texto "CEFET MARKET" */
+  cursor: pointer;
+  height: 60px;
+  width: auto;
 }
 
-.logo img {
-  height: 30px; /* Ajuste a altura do logo conforme necessário */
-  /* Se o ícone for SVG, pode não precisar de margin-right se o gap resolver */
+.logo-link {
+  display: inline-block;
 }
 
-.logo h1 {
-  font-size: 1.2em; /* Tamanho da fonte para "CEFET MARKET" */
-  line-height: 1; /* Ajuda no alinhamento vertical com a imagem */
-}
-
+/* Estilo do botão do carrinho */
 .cart {
   color: white;
   text-decoration: none;
   font-weight: bold;
   display: flex;
   align-items: center;
-  gap: 5px; /* Espaço entre o ícone do carrinho e o texto "Carrinho" */
+  gap: 5px;
 }
 
 /* ------------------------------------- */

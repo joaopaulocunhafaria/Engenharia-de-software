@@ -46,9 +46,9 @@ import { ListagemUsuarioComponent } from './listagem-usuario/listagem-usuario.co
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

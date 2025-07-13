@@ -2,18 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProdutoService } from '../services/produtos/produto.service';
 import { Produto } from '../Domain/Models/Product.Model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-produto',
   templateUrl: './cadastrar-produto.component.html',
-  styleUrls: ['./cadastrar-produto.component.scss'],
+  styleUrls: ['./cadastrar-produto.component.scss']
 })
 export class CadastrarProdutoComponent implements OnInit {
-  form!: FormGroup; // substitui o objeto produto
+  form!: FormGroup;
   imagemSelecionada: File | null = null;
+
+  mensagem: string = '';
+  sucesso: boolean = false;
+  erro: boolean = false;
+
   constructor(
     private fb: FormBuilder,
-    private produtoService: ProdutoService
+    private produtoService: ProdutoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -22,7 +29,7 @@ export class CadastrarProdutoComponent implements OnInit {
       descricao: ['', Validators.required],
       preco: [null, [Validators.required, Validators.min(0.01)]],
       estoque: [null, [Validators.required, Validators.min(1)]],
-      categoria: ['', Validators.required],
+      categoria: ['', Validators.required]
     });
   }
 
@@ -30,13 +37,12 @@ export class CadastrarProdutoComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.imagemSelecionada = file;
-      console.log('Imagem selecionada:', this.imagemSelecionada);
     }
   }
 
   cadastrar() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched(); // força exibir os erros
+      this.form.markAllAsTouched();
       return;
     }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; // <-- Importante para redirecionar
 
 interface Produto {
   nome: string;
@@ -21,7 +22,7 @@ export class ListagemProdutoComponent implements OnInit {
     { nome: 'produto 3', preco: 'R$200', estoque: 5, categoria: 'outra categoria' },
     { nome: 'produto 4', preco: 'R$50', estoque: 100, categoria: 'categoria básica' }
   ];
-  constructor() { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.produtos.forEach(produto => produto.isEditing = false);
@@ -40,6 +41,10 @@ export class ListagemProdutoComponent implements OnInit {
 
     // Após salvar, você pode sair do modo de edição
     produto.isEditing = false;
+  }
+
+  irParaCadastro() {
+    this.router.navigate(['/cadastrar-produto']);
   }
 
 }
