@@ -4,20 +4,25 @@
   <header class="header">
     <div class="header-content">
       <!-- User Info -->
+      <div class="center">
       <div class="user-info" (click)="navigateToLogin()">
         <i class="fas fa-user-circle"></i>
         <span class="username">nome_usuário</span>
       </div>
+    </div>
 
       <!-- Logo -->
-      <div class="logo">
-        <img src="assets/logo.png" alt="CEFET MARKET Logo" class="logo-image">
+        <div class="center">
+          <a routerLink="/" class="logo-link">
+            <img src="assets/logo.png" alt="CEFET MARKET" class="logo">
+          </a>
       </div>
 
       <!-- Cart -->
-      <div class="cart" (click)="navigateToCart()">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-text">Carrinho</span>
+      <div class="right">
+        <a routerLink="/checkout" class="cart">
+          <i class="fas fa-shopping-cart"></i> Carrinho
+        </a>
       </div>
     </div>
   </header>

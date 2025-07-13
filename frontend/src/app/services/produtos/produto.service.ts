@@ -8,9 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProdutoService {
-  constructor() {}
 
-<<<<<<< HEAD
   private handleErrorlogin(error: any): Observable<never> {
     console.error('An error occurred:', error);
     throw error;
@@ -49,20 +47,5 @@ export class ProdutoService {
         catchError(this.handleErrorlogin)
 
       ));
-=======
-  // Simula sucesso (como se o backend tivesse respondido bem)
-  createMock(produto: Produto): Observable<any> {
-    console.log('Simulando envio do produto:', produto);
-    return of({
-      success: true,
-      message: 'Produto cadastrado com sucesso!',
-      produto: produto
-    }).pipe(delay(1000)); // simula 1 segundo de espera
-  }
-
-  createProduto(produto: Produto): Observable<any> {
-    // ⚠ Aqui usamos o mock, já que não há API real
-    return this.createMock(produto);
->>>>>>> ab52663c46deb4a02103c2be8af34c7ef7e1f2f3
   }
 }

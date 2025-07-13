@@ -64,9 +64,9 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
-    component: CheckoutComponent,/*
+    component: CheckoutComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['CLIENTE'] }*/
+    data: { roles: ['CLIENTE'] }
   },
 
   // Fallback (página não encontrada redireciona para home)

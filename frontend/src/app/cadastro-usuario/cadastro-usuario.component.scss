@@ -40,52 +40,57 @@ body {
 
 // Header (mesmo estilo da home)
 .header {
-  background-color: $primary-blue;
-  color: $white;
-  padding: 15px 0;
-  width: 100%;
+  background-color: #264699;
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+}
 
-  .header-content {
-    @include flex-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
+/* Define largura igual para os 3 blocos (esquerda, centro, direita) */
+.left,
+.center,
+.right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;                // Corrige a cor azul
+  text-decoration: none;       // Remove sublinhado
+  font-weight: bold;
+
+  i {
+    font-size: 24px;
   }
+}
 
-  .user-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-    cursor: pointer;
+/* Estilo da logo */
+.logo {
+  cursor: pointer;
+  height: 60px;
+  width: auto;
+}
 
-    i {
-      font-size: 24px;
-    }
-  }
+.logo-link {
+  display: inline-block;
+}
 
-  .logo {
-    @include flex-center;
-    cursor: pointer;
-
-    .logo-image {
-      height: 60px;
-      width: auto;
-      object-fit: contain;
-    }
-  }
-
-  .cart {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-    cursor: pointer;
-
-    i {
-      font-size: 24px;
-    }
-  }
+/* Estilo do botão do carrinho */
+.cart {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 // Main Content
