@@ -2,18 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProdutoService } from '../services/produtos/produto.service';
 import { Produto } from '../Domain/Models/Product.Model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-produto',
   templateUrl: './cadastrar-produto.component.html',
-  styleUrls: ['./cadastrar-produto.component.scss'],
+  styleUrls: ['./cadastrar-produto.component.scss']
 })
 export class CadastrarProdutoComponent implements OnInit {
-  form!: FormGroup; // substitui o objeto produto
+  form!: FormGroup;
   imagemSelecionada: File | null = null;
+
+  mensagem: string = '';
+  sucesso: boolean = false;
+  erro: boolean = false;
+
   constructor(
     private fb: FormBuilder,
-    private produtoService: ProdutoService
+    private produtoService: ProdutoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -22,7 +29,7 @@ export class CadastrarProdutoComponent implements OnInit {
       descricao: ['', Validators.required],
       preco: [null, [Validators.required, Validators.min(0.01)]],
       estoque: [null, [Validators.required, Validators.min(1)]],
-      categoria: ['', Validators.required],
+      categoria: ['', Validators.required]
     });
   }
 
@@ -30,34 +37,46 @@ export class CadastrarProdutoComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.imagemSelecionada = file;
-      console.log('Imagem selecionada:', this.imagemSelecionada);
     }
   }
 
   cadastrar() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched(); // força exibir os erros
+      this.form.markAllAsTouched();
       return;
     }
 
     const produto = this.form.value;
- 
-    const formData = new FormData();
-    if (this.imagemSelecionada) {
-      formData.append('image', this.imagemSelecionada); // tipo: File
-    }
-    formData.append('title', produto.nome);
-    formData.append('description', produto.descricao);
-    formData.append('ownerId', "3");
-    formData.append('category', produto.categoria);
-    formData.append('price', produto.preco.toString());
-    this.produtoService.createProduto(formData).subscribe({
-      next: (response) => {
-        console.log('Produto cadastrado com sucesso:', response);
+
+    const imagem = this.imagemSelecionada ?? new File([], '');
+
+    const produtoPayload: Produto = {
+      id: 0,
+      token: 'mock-token',
+      title: produto.nome,
+      description: produto.descricao,
+      image: imagem,
+      ownerId: 'mock-owner-id',
+      category: produto.categoria,
+      price: produto.preco
+    };
+
+    this.produtoService.createProduto(produtoPayload).subscribe({
+      next: (res) => {
+        this.mensagem = res.message || 'Produto cadastrado!';
+        this.sucesso = true;
+        this.erro = false;
+
+        // Redirecionar após 2 segundos
+        setTimeout(() => {
+          this.router.navigate(['/listagem-produto']);
+        }, 2000);
       },
-      error: (error) => {
-        console.error('Erro ao cadastrar produto:', error);
-      },
+      error: (err) => {
+        this.mensagem = 'Erro ao cadastrar produto. Tente novamente.';
+        this.sucesso = false;
+        this.erro = true;
+      }
     });
   }
 }

@@ -42,7 +42,8 @@ body {
 .header {
   background-color: $primary-blue;
   color: $white;
-  padding: 20px 0;
+  padding: 15px 0;
+  width: 100%;
 
   .header-content {
     @include flex-between;

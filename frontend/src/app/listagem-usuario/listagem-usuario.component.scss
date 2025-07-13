@@ -24,35 +24,59 @@ body, html {
 }
 
 /* Estilos do Cabeçalho (Centralizado) */
-header {
-    background: #264699;
+.header {
+    background-color: #264699;
     color: white;
+    text-align: center;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Define largura igual para os 3 blocos (esquerda, centro, direita) */
+  .left,
+  .center,
+  .right {
+    flex: 1;
     display: flex;
-    justify-content: center; /* ALINHA HORIZONTALMENTE AO CENTRO */
     align-items: center;
-    padding: 10px 20px;
-    width: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-top: 0; /* Garante que não há margem no topo */
-}
+    justify-content: center;
+  }
 
-.logo {
-    flex-grow: 1; /* Permite que o logo ocupe o espaço disponível */
-    text-align: center; /* Centraliza o conteúdo dentro do logo (a imagem/link) */
-}
-
-.logo-link {
-    display: inline-flex; /* Usa inline-flex para centralizar o conteúdo do link */
+  .user-info {
+    display: flex;
     align-items: center;
     gap: 10px;
-    text-decoration: none;
-    color: white;
+    font-size: 16px;
     cursor: pointer;
-}
-
-.logo-link img {
-    height: 40px;
-}
+    color: white;                // Corrige a cor azul
+    text-decoration: none;       // Remove sublinhado
+    font-weight: bold;
+  
+    i {
+      font-size: 24px;
+    }
+  }
+  
+  /* Estilo da logo */
+  .logo {
+    cursor: pointer;
+    height: 60px;
+    width: auto;
+  }
+  
+  .logo-link {
+    display: inline-block;
+  }
+  
+  /* Estilo do botão do carrinho */
+  .cart {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 
 
 /* Estilos do conteúdo principal */

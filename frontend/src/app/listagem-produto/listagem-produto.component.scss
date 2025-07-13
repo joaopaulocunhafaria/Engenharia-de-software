@@ -20,44 +20,59 @@ body {
 /* ------------------------------------- */
 /* CABEÇALHO (HEADER) */
 /* ------------------------------------- */
-header {
-    background: #264699; /* Azul do CEFET MARKET */
+.header {
+    background-color: #264699;
     color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px; /* Padding interno para o conteúdo do header */
-    width: 100%; /* Garante que o header ocupe toda a largura */
-    margin-bottom: 40px; /* Espaço abaixo do cabeçalho */
-}
-
-header .logo img{
-    height: 50px;
-}
-
-.logo {
+    text-align: center;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Define largura igual para os 3 blocos (esquerda, centro, direita) */
+  .left,
+  .center,
+  .right {
+    flex: 1;
     display: flex;
     align-items: center;
-    gap: 10px; /* Espaço entre a imagem do logo e o texto "CEFET MARKET" */
-}
+    justify-content: center;
+  }
 
-.logo img {
-    height: 30px; /* Ajuste a altura do logo conforme necessário */
-}
-
-.logo h1 {
-    font-size: 1.2em; /* Tamanho da fonte para "CEFET MARKET" */
-    line-height: 1; /* Ajuda no alinhamento vertical com a imagem */
-}
-
-.cart {
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;                // Corrige a cor azul
+    text-decoration: none;       // Remove sublinhado
+    font-weight: bold;
+  
+    i {
+      font-size: 24px;
+    }
+  }
+  
+  /* Estilo da logo */
+  .logo {
+    cursor: pointer;
+    height: 60px;
+    width: auto;
+  }
+  
+  .logo-link {
+    display: inline-block;
+  }
+  
+  /* Estilo do botão do carrinho */
+  .cart {
     color: white;
     text-decoration: none;
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 5px; /* Espaço entre o ícone do carrinho e o texto "Carrinho" */
-}
+    gap: 5px;
+  }
 
 /* ------------------------------------- */
 /* CONTEÚDO PRINCIPAL DA LISTA DE PRODUTOS */
@@ -137,3 +152,33 @@ table input[type="number"] {
 .edit-btn:hover {
     background-color: darken(#28a745, 10%); /* Escurece um pouco ao passar o mouse */
 }
+
+button {
+    padding: 5px 12px;
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #ce0d0d;
+  }
+
+  .novo-produto {
+    background-color: #264699;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .novo-produto:hover {
+    background-color: #174aca;
+  }

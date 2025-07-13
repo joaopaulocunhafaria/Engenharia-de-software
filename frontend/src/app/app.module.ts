@@ -18,11 +18,8 @@ import { ListagemProdutoComponent } from './listagem-produto/listagem-produto.co
 import { MinhaContaComponent } from './minha-conta/minha-conta.component';
 import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 import { SeusPedidosComponent } from './seus-pedidos/seus-pedidos.component';
-<<<<<<< HEAD
 import { CheckoutComponent } from './checkout/checkout.component';
-=======
 import { ListagemUsuarioComponent } from './listagem-usuario/listagem-usuario.component';
->>>>>>> 2b4ec39637e9d243546012f64ed9e0c0e24a44de
 
 @NgModule({
   declarations: [
@@ -40,21 +37,17 @@ import { ListagemUsuarioComponent } from './listagem-usuario/listagem-usuario.co
     MinhaContaComponent,
     DadosPessoaisComponent,
     SeusPedidosComponent,
-<<<<<<< HEAD
     CheckoutComponent,
-=======
-    ListagemUsuarioComponent,
->>>>>>> 2b4ec39637e9d243546012f64ed9e0c0e24a44de
-
+    ListagemUsuarioComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
