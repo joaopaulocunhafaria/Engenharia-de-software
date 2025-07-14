@@ -13,9 +13,8 @@
 body {
   background: #fff;
   color: #000;
-  margin: 0; /* Remove a margem padrão do body, eliminando a "barra branca" superior/lateral */
+  margin: 0; 
   padding: 0;
-  /* Se você quiser algum padding geral nas laterais para o conteúdo, adicione no .container ou main */
 }
 
 /* ------------------------------------- */
@@ -28,12 +27,22 @@ body {
   padding: 15px 20px;
   margin-bottom: 20px;
 }
+.header-content {
+    display: flex;
+    justify-content: space-between; // Alinha os itens nas extremidades
+    align-items: center;
+}
 
-/* Define largura igual para os 3 blocos (esquerda, centro, direita) */
-.left,
-.center,
-.right {
+/* Centraliza apenas o logo */
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 1;
+}
+
+/* Empurra o carrinho para a direita */
+.right {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,8 +54,8 @@ body {
   gap: 10px;
   font-size: 16px;
   cursor: pointer;
-  color: white;                // Corrige a cor azul
-  text-decoration: none;       // Remove sublinhado
+  color: white;
+  text-decoration: none;
   font-weight: bold;
 
   i {
@@ -54,7 +63,6 @@ body {
   }
 }
 
-/* Estilo da logo */
 .logo {
   cursor: pointer;
   height: 60px;
@@ -65,7 +73,6 @@ body {
   display: inline-block;
 }
 
-/* Estilo do botão do carrinho */
 .cart {
   color: white;
   text-decoration: none;
@@ -80,10 +87,10 @@ body {
 /* ------------------------------------- */
 main {
   display: flex;
-  gap: 20px; /* Espaço entre a galeria de imagens e a caixa de detalhes do produto */
+  gap: 20px;
   margin-top: 20px;
-  padding: 0 20px; /* Padding lateral para o conteúdo principal, alinhando com o header */
-  align-items: flex-start; /* Alinha os itens no topo do container flex (main) */
+  padding: 0 20px;
+  align-items: flex-start;
 }
 
 /* ------------------------------------- */
@@ -91,18 +98,18 @@ main {
 /* ------------------------------------- */
 .gallery {
   display: flex;
-  gap: 10px; /* Espaço entre as miniaturas e a foto principal */
+  gap: 10px;
 }
 
 .thumbnails {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Espaço entre as miniaturas */
+  gap: 10px;
 }
 
 .thumb,
 .main-photo {
-  background: #D9D9D9; /* Cinza claro */
+  background: #D9D9D9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,8 +123,8 @@ main {
 }
 
 .main-photo {
-  width: 600px; /* Largura da imagem principal */
-  height: 350px; /* Altura da imagem principal */
+  width: 600px;
+  height: 350px;
   font-size: 24px;
 }
 
@@ -125,14 +132,14 @@ main {
 /* INFORMAÇÕES DO PRODUTO (CAIXA DA DIREITA) */
 /* ------------------------------------- */
 .product-info {
-  border: 2px solid #264699; /* Borda azul */
+  border: 2px solid #264699;
   border-radius: 10px;
   padding: 20px;
-  width: 400px; /* Largura da caixa de informações */
+  width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-left: auto; /* ESSENCIAL: Empurra esta caixa para a direita, preenchendo o espaço disponível */
+  margin-left: auto;
 }
 
 .product-info h2 {
@@ -159,7 +166,7 @@ main {
   font-size: 14px;
 }
 
-.shipping svg { /* Para ícone de localização */
+.shipping svg {
   width: 16px;
   height: 16px;
   fill: #000;
@@ -177,7 +184,7 @@ main {
   display: flex;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: hidden; /* Garante que as bordas arredondadas se apliquem corretamente */
+  overflow: hidden;
 }
 
 .quantity-selector button {
@@ -218,13 +225,13 @@ main {
 }
 
 .buy-btn {
-  background: #264699; /* Azul do CEFET MARKET */
+  background: #264699;
   color: white;
 }
 
 .cart-btn {
   background: white;
-  border: 2px solid #264699; /* Borda azul */
+  border: 2px solid #264699;
   color: #264699;
 }
 
@@ -233,7 +240,7 @@ main {
 /* ------------------------------------- */
 .comments {
   margin-top: 40px;
-  padding: 0 20px; /* Padding lateral para alinhar com o conteúdo principal */
+  padding: 0 20px;
 }
 
 .comments h3 {
@@ -245,12 +252,12 @@ main {
 }
 
 .comments .stars {
-  color: #FFD700; /* Cor amarela para as estrelas de texto */
+  color: #FFD700;
   font-size: 1.2em;
 }
 
 .comments textarea {
-  width: 70%; /* Ajuste a largura conforme necessário */
+  width: 70%;
   height: 100px;
   border: 2px solid #264699;
   border-radius: 10px;

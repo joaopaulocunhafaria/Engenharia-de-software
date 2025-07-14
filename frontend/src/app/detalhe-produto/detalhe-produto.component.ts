@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { productsMocks } from '../Domain/Mocks/Products.Mocks';
 import { ProdutoService } from '../services/produtos/produto.service';
 import { UserService } from '../services/user/user.service';
@@ -44,7 +44,8 @@ export class DetalheProdutoComponent implements OnInit {
   constructor(private route: ActivatedRoute,
         private produtoService: ProdutoService,
       private userService: UserService,
-    private carrinhoService:CarrinhoService) { }
+    private carrinhoService:CarrinhoService,
+    private router: Router) { }
 
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
@@ -88,13 +89,13 @@ export class DetalheProdutoComponent implements OnInit {
   }
 
   increaseQuantity(): void {
-    if (this.productQuantity < this.maxStock) { // Verifica se não excede o estoque máximo
+    if (this.productQuantity < this.maxStock) {
       this.productQuantity++;
     }
   }
 
   decreaseQuantity(): void {
-    if (this.productQuantity > 1) { // Garante que a quantidade não seja menor que 1
+    if (this.productQuantity > 1) {
       this.productQuantity--;
     }
   }
@@ -105,7 +106,6 @@ export class DetalheProdutoComponent implements OnInit {
 
   submitReview(): void {
     if (this.userRating > 0 && this.userComment.trim()) {
-      // Lógica para enviar a avaliação
       console.log('Avaliação enviada:', {
         rating: this.userRating,
         comment: this.userComment
@@ -135,7 +135,18 @@ export class DetalheProdutoComponent implements OnInit {
   }
 
   buyNow(): void {
-    console.log('Compra rápida do produto:', this.product?.id);
+    const userId: string = this.user?.id ? String(this.user.id) : "";
+    const productId: string = this.product?.id ? String(this.product.id) : "";
+
+    this.carrinhoService.addItem(userId, productId, this.productQuantity).subscribe({
+      next: () => {
+        alert('Produto adicionado ao carrinho com sucesso!');
+        this.router.navigate(['/checkout']);
+      },
+      error: () => {
+        alert('Erro ao adicionar produto ao carrinho. Tente novamente mais tarde.');
+      }
+    });
   }
   
 }
