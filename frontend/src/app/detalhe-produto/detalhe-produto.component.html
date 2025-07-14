@@ -1,43 +1,50 @@
-<header>
-    <div class="logo">
-        <a [routerLink]="['/home']" class="logo-link"></a>
-        <img src="assets/logo.png" alt="CEFET MARKET Logo">
+<header class="header">
+    <div class="header-content">
+        
+      <div class="center">
+        <a routerLink="/" class="logo-link">
+          <img src="assets/logo.png" alt="CEFET MARKET" class="logo">
+        </a>
+      </div>
+  
+      <div class="right">
+        <a routerLink="/checkout" class="cart">
+          <i class="fas fa-shopping-cart"></i> Carrinho
+        </a>
+      </div>
     </div>
-    <a href="#" class="cart">
-        <i class="fas fa-shopping-cart"></i> Carrinho
-    </a>
-</header>
+  </header>
+             
+  
+  <main>
+      <section class="gallery">
            
-
-<main>
-    <section class="gallery">
-         
-        <div class="main-photo">
-  <img   [src]="'data:image/jpeg;base64,' + product?.image" alt="Produto">
-          
-        </div>
-    </section>
-
-    <section class="product-info">
-        <h2>{{product?.title}}</h2>
-        <p class="description">
-           {{product?.description}}
-        </p>
-        <p class="vendendor">{{seller?.name}}</p>
-        <div class="shipping">
-            <span>Envia para:</span>
-            <span>{{user?.endereco}} <i class="fas fa-map-marker-alt"></i></span>
-        </div>
-
-        <div class="quantity-stock">
-            <div class="quantity-selector">
-                <button (click)="decreaseQuantity()">-</button>
-                <input type="number" [(ngModel)]="productQuantity" min="1">
-                <button (click)="increaseQuantity()">+</button>
-            </div>
-            <span class="stock">Estoque: <strong>{{product?.quantity}} unidades</strong></span>
-        </div>
-        <button class="buy-btn">Comprar Agora</button>
-        <button (click)="addToCart()" class="cart-btn">Adicionar ao carrinho</button>
-    </section>
-</main> 
+          <div class="main-photo">
+    <img   [src]="'data:image/jpeg;base64,' + product?.image" alt="Produto">
+            
+          </div>
+      </section>
+  
+      <section class="product-info">
+          <h2>{{product?.title}}</h2>
+          <p class="description">
+             {{product?.description}}
+          </p>
+          <p class="vendendor">{{seller?.name}}</p>
+          <div class="shipping">
+              <span>Envia para:</span>
+              <span>{{user?.endereco}} <i class="fas fa-map-marker-alt"></i></span>
+          </div>
+  
+          <div class="quantity-stock">
+              <div class="quantity-selector">
+                  <button (click)="decreaseQuantity()">-</button>
+                  <input type="number" [(ngModel)]="productQuantity" min="1">
+                  <button (click)="increaseQuantity()">+</button>
+              </div>
+              <span class="stock">Estoque: <strong>{{product?.quantity}} unidades</strong></span>
+          </div>
+          <button (click)="buyNow()" class="buy-btn">Comprar Agora</button>
+          <button (click)="addToCart()" class="cart-btn">Adicionar ao carrinho</button>
+      </section>
+  </main>
