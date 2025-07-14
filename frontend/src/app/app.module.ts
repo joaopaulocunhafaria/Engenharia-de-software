@@ -39,7 +39,7 @@ import { ListagemUsuarioComponent } from './listagem-usuario/listagem-usuario.co
     SeusPedidosComponent,
     CheckoutComponent,
     ListagemUsuarioComponent,
-
+    
   ],
   imports: [
     BrowserModule,

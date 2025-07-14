@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export interface CarrinhoItem {
   id: number;
@@ -47,5 +48,8 @@ export class CarrinhoService {
       quantity: quantity
     }
     return this.http.post<CarrinhoItem>(`${this.apiroute}`, payload );
+  }
+  finalizarCompra(userId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiroute}/clear/${userId}`);
   }
 }

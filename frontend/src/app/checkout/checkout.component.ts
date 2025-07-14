@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CarrinhoService, CarrinhoItem } from '../services/carrinho.service';
 import { UserService } from '../services/user/user.service';
 
@@ -19,10 +20,16 @@ export class CheckoutComponent implements OnInit {
     destinatario: 'nome_usuario'
   };
 
-  constructor(private carrinho: CarrinhoService, private userService:UserService) {}
+  constructor(private carrinho: CarrinhoService, private userService:UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
+
+ if (!this.userId) {
+        // Se não houver ID de usuário, redireciona para o login ou home
+        this.router.navigate(['/login']);
+        return;
+    }
 
     this.carrinho.getByUserId(this.userId).subscribe({
       next: (response:any) => {
@@ -51,8 +58,19 @@ export class CheckoutComponent implements OnInit {
   this.total = this.itens.reduce((soma, item) => soma + item.price * item.quantity, 0);
 }
 
-comprar(): void {}
-
+comprar(): void {
+    this.carrinho.finalizarCompra(this.userId).subscribe({
+      next: () => {
+        alert('Compra finalizada com sucesso! ✅');
+        this.router.navigate(['/']);
+      },
+      // A correção está em (err: any)
+      error: (err: any) => { 
+        console.error('Falha ao finalizar a compra:', err);
+        alert('Ocorreu um erro ao processar sua compra. Tente novamente. ❌');
+      }
+    });
+  }
 mais(item:any){}
 
 remover(item:any): void {}
