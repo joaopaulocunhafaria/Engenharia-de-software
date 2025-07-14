@@ -53,7 +53,7 @@
       </div>
   
       <!-- Minhas Vendas -->
-      <div class="option-card" [routerLink]="['/listagem-produto']">
+      <div class="option-card" *ngIf="isSeller" [routerLink]="['/listagem-produto']">
         <div class="option-content">
           <h3>Minhas Vendas</h3>
           <p>Meus produtos de vendas</p>
@@ -61,7 +61,7 @@
         <i class="fas fa-chevron-right"></i>
       </div>
 
-      <div class="option-card" [routerLink]="['/listagem-usuario']">
+      <div class="option-card" *ngIf="isAdmin" [routerLink]="['/listagem-usuario']">
         <div class="option-content">
           <h3>Usuários</h3>
           <p>Gerenciador de usuários</p>

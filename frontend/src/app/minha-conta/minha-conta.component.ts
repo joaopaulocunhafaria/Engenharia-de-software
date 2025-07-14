@@ -8,6 +8,7 @@ interface Seller{
   name: string;
   email: string;
   endereco: string;
+  role?: string;
 }
 
 @Component({
@@ -18,6 +19,8 @@ interface Seller{
 export class MinhaContaComponent implements OnInit {
 
   usuario:any;
+  isSeller: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -27,6 +30,12 @@ export class MinhaContaComponent implements OnInit {
         next: (response) => {
           this.usuario = response;
           console.log('Dados do usuário recebidos:', this.usuario);
+          if(this.usuario.role === 'SELLER'){
+            this.isSeller = true;
+          }
+          if(this.usuario.role === 'ADMIN'){
+            this.isAdmin = true;
+          }
         }
         , error: (error) => {
           console.error('Erro ao carregar dados do usuário:', error);
