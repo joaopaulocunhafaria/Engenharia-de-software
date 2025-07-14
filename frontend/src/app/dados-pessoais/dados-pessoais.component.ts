@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../services/user/user.service';
 
 
 @Component({
@@ -17,12 +18,14 @@ export class DadosPessoaisComponent implements OnInit {
   private _email: string = 'usuario@example.com';
   private _endereco: string = 'Rua Exemplo, 123 - Cidade, Estado';
 
+  user:any;
+
   // Usamos getters para acessar os valores no template quando não estiver em editMode
   get nomeCompleto(): string { return this._nomeCompleto; }
   get email(): string { return this._email; }
   get endereco(): string { return this._endereco; }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private userService:UserService) { }
 
   ngOnInit(): void {
     this.personalDataForm = this.fb.group({
@@ -33,6 +36,21 @@ export class DadosPessoaisComponent implements OnInit {
       password: ['', [Validators.minLength(6)]] // Senha é opcional para edição, mas com minLength
     });
 
+    const id = localStorage.getItem('id') || '';
+    this.userService.getById(id).subscribe({
+      next: (data) => {
+        this.user = data;
+        this._nomeCompleto = data.name;
+        this._email = data.email;
+        this._endereco = data.endereco;
+
+        this.personalDataForm.patchValue({
+          nomeCompleto: this._nomeCompleto,
+          email: this._email,
+          endereco: this._endereco
+        });
+      }
+    });
   }
   get f() { return this.personalDataForm.controls; }
 
@@ -56,19 +74,36 @@ export class DadosPessoaisComponent implements OnInit {
     // Marca todos os campos como "touched" para exibir mensagens de validação
     this.personalDataForm.markAllAsTouched();
 
+
+
     if (this.personalDataForm.invalid) {
       console.log('Formulário inválido. Verifique os campos.');
       return;
     }
 
-    const updatedData = this.personalDataForm.value;
-    console.log('Dados a serem salvos:', updatedData);
+    
+    const userPayload = {
+      name: this.personalDataForm.get("nomeCompleto")?.value ?? this.user.name,
+      email: this.personalDataForm.get("email")?.value ?? this.user.email,
+      password: this.personalDataForm.get("password")?.value ||"", // Mantém a senha atual se não for alterada
+      role: this.user.role, 
+      endereco: this.personalDataForm.get("endereco")?.value ?? this.user.endereco
+    };  
+     
+    this.userService.updateUser(userPayload).subscribe({
+      next: () => {
+        console.log('Dados pessoais atualizados com sucesso!');
+        // Atualiza os valores locais após salvar
+        this._nomeCompleto = userPayload.name;
+        this._email = userPayload.email;
+        this._endereco = userPayload.endereco;
 
-    this._nomeCompleto = updatedData.nomeCompleto;
-    this._email = updatedData.email;
-    this._endereco = updatedData.endereco;
-    this.editMode = false; // Sai do modo de edição
-    this.personalDataForm.get('password')?.setValue('');
-
+        // Sai do modo de edição
+        this.toggleEditMode();
+      },
+      error: (error) => {
+        console.error('Erro ao atualizar dados pessoais:', error);
+      }
+    });
   }
 }

@@ -9,6 +9,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.microservice.users.domain.users.User;
+import com.microservice.users.domain.users.UserRole;
 import com.microservice.users.repositories.UserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -59,5 +60,17 @@ public class UserService {
         entity.setName(obj.getName());
         entity.setPassword(obj.getPassword());
         entity.setRole(obj.getRole());
+        entity.setEndereco(obj.getEndereco());
+    }
+
+    public User updateRole(String id, UserRole role) throws Exception {
+        try {
+            Optional<User> optionalEntity = repository.findById(id);
+            User entity = optionalEntity.orElseThrow(() -> new Exception("User not found with ID: " + id));
+            entity.setRole(role);
+            return repository.save(entity);
+        } catch (DataIntegrityViolationException e) {
+            throw new Exception("Error updating user role: " + e.getMessage());
+        }
     }
 }

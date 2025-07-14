@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
 
   navigateToCart(): void {
     console.log('Navegando para o carrinho');
-    this.router.navigate(['/carrinho']);
+    this.router.navigate(['/checkout']);
   }
 
   // --- MÉTODOS ORIGINAIS ---

@@ -137,6 +137,7 @@ public class CarrinhoController {
         }
     }
 
+    @DeleteMapping("/id/{carrinhoId}")
 
 
     @GetMapping("/user/{userId}")

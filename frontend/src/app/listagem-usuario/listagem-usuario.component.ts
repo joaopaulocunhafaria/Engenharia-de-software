@@ -1,50 +1,66 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user/user.service';
 
 interface User {
   id: number;
-  nome: string;
+  name: string;
   email: string;
-  cargo: string;
+  role: string;
 }
 
 @Component({
   selector: 'app-listagem-usuario',
   templateUrl: './listagem-usuario.component.html',
-  styleUrls: ['./listagem-usuario.component.scss']
+  styleUrls: ['./listagem-usuario.component.scss'],
 })
 export class ListagemUsuarioComponent implements OnInit {
-
   users: User[] = [];
-  roles: string[] = ['admin', 'vendedor', 'cliente'];
 
-  constructor() { }
+  roles: string[] = ['ADMIN', 'SELLER', 'USER'];
+  id: any;
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
+    this.id = localStorage.getItem('id') || '';
     this.loadUsers();
   }
 
-  loadUsers(): void{
-    this.users = [
-      { id: 1, nome: 'nome_usuario', email: 'usuario@email.com', cargo: 'vendedor' },
-      { id: 2, nome: 'nome_usuario1', email: 'usuario1@email.com', cargo: 'admin' },
-      { id: 3, nome: 'Ana Silva', email: 'ana.silva@email.com', cargo: 'cliente' },
-
-    ];
+  loadUsers(): void {
+    this.userService.getAll().subscribe({
+      next: (data) => {
+        this.users = data.filter((user: User) => user.id !== this.id);
+        console.log('Usuários recebidos:', this.users);
+      },
+      error: (err) => {
+        console.error('Erro ao carregar usuários:', err);
+      },
+    });
   }
 
   saveRole(user: User): void {
-
-    console.log(`Salvando cargo para ${user.nome}: ${user.cargo}`);
-    alert(`Cargo de ${user.nome} alterado para ${user.cargo}" (Simulado)`);
+    const userId = user.id;
+    const role = user.role;
+    this.userService.updateRole(userId, role).subscribe({
+      next: (response) => {
+        console.log('Cargo atualizado com sucesso:', response);
+        alert('Cargo atualizado com sucesso!');
+      },
+      error: (err) => {},
+    });
   }
 
-  deleteUser(userId: number): void{
-
-    if (confirm('Tem certeza que deseja deletar este usuário?')){
-      this.users = this.users.filter(user => user.id !== userId);
-      console.log(`Usuário com ID ${userId} deletado.`);
-      alert('Usuário deletado! (Simulado)');
+  deleteUser(userId: any): void {
+    if (confirm('Tem certeza que deseja excluir este usuário?')) {
+      this.userService.deleteUser(userId).subscribe({
+        next: () => {
+          this.users = this.users.filter((user) => user.id !== userId);
+          alert('Usuário deletado com sucesso!');
+        },
+        error: (err) => {
+          console.error('Erro ao deletar usuário:', err);
+          window.location.reload();
+        },
+      });
     }
   }
-
 }

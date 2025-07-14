@@ -83,14 +83,7 @@
 
     <nav class="sidebar-nav">
 
-      <a *ngIf="userRole === 'VISITANTE' || userRole === 'ROLE_USER'" href="#" class="nav-item" (click)="navigateTo('/ofertas', $event)">
-        <i class="fas fa-tag"></i>
-        <span>Ofertas</span>
-      </a>
-      <a *ngIf="userRole === 'VISITANTE' || userRole === 'ROLE_USER'" href="#" class="nav-item" (click)="navigateTo('/configuracoes', $event)">
-        <i class="fas fa-cog"></i>
-        <span>Configurações</span>
-      </a>
+       
       
       <a *ngIf="isLoggedIn" href="#" class="nav-item" (click)="navigateTo('/minha-conta', $event)">
         <i class="fas fa-user-circle"></i>
@@ -101,7 +94,7 @@
         <i class="fas fa-box"></i>
         <span>Minhas Compras</span>
       </a>
-      <a *ngIf="userRole === 'ROLE_USER'" href="#" class="nav-item" (click)="navigateTo('/carrinho', $event)">
+      <a *ngIf="userRole === 'ROLE_USER'" href="#" class="nav-item" (click)="navigateTo('/checkout', $event)">
         <i class="fas fa-shopping-cart"></i>
         <span>Carrinho</span>
       </a>
@@ -115,11 +108,11 @@
         <span>Editar Produto</span>
       </a>
 
-      <a *ngIf="userRole === 'ROLE_ADMIN'" href="#" class="nav-item" (click)="navigateTo('/cadastrar-usuario', $event)">
+      <a *ngIf="userRole === 'ROLE_ADMIN'" href="#" class="nav-item" (click)="navigateTo('/cadastro', $event)">
         <i class="fas fa-user-plus"></i>
         <span>Cadastrar Usuário</span>
       </a>
-      <a *ngIf="userRole === 'ROLE_ADMIN'" href="#" class="nav-item" (click)="navigateTo('/editar-usuario', $event)">
+      <a *ngIf="userRole === 'ROLE_ADMIN'" href="#" class="nav-item" (click)="navigateTo('/listagem-usuario', $event)">
         <i class="fas fa-user-edit"></i>
         <span>Editar Usuário</span>
       </a>
