@@ -99,11 +99,11 @@
         <span>Carrinho</span>
       </a>
 
-      <a *ngIf="userRole === 'ROLE_SELLER'" href="#" class="nav-item" (click)="navigateTo('/cadastrar-produto', $event)">
+      <a *ngIf="userRole === 'ROLE_SELLER' || userRole === 'ROLE_ADMIN'" href="#" class="nav-item" (click)="navigateTo('/cadastrar-produto', $event)">
         <i class="fas fa-plus-circle"></i>
         <span>Cadastrar Produto</span>
       </a>
-      <a *ngIf="userRole === 'ROLE_SELLER'" href="#" class="nav-item" (click)="navigateTo('/editar-produto', $event)">
+      <a *ngIf="userRole === 'ROLE_SELLER' || userRole === 'ROLE_ADMIN'" href="#" class="nav-item" (click)="navigateTo('/editar-produto', $event)">
         <i class="fas fa-edit"></i>
         <span>Editar Produto</span>
       </a>
