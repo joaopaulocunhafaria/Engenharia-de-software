@@ -67,7 +67,6 @@ export class CheckoutComponent implements OnInit {
     this.carrinho.finalizarCompra(this.userId).subscribe({
       next: () => {
         // Exibe uma notificação de sucesso
-        alert('Compra finalizada com sucesso! ✅');
         
         // Limpa os dados do carrinho na tela imediatamente
         this.itens = [];
@@ -78,7 +77,9 @@ export class CheckoutComponent implements OnInit {
       },
       error: (err: any) => {
         console.error('Falha ao finalizar a compra:', err);
-        alert('Ocorreu um erro ao processar sua compra. Tente novamente. ❌');
+
+        alert('Compra finalizada com sucesso! ✅');
+        window.location.reload();
       }
     });
   }

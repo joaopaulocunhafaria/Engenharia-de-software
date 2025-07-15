@@ -97,6 +97,10 @@ export class DadosPessoaisComponent implements OnInit {
         this._nomeCompleto = userPayload.name;
         this._email = userPayload.email;
         this._endereco = userPayload.endereco;
+       
+
+
+        
 
         // Sai do modo de edição
         this.toggleEditMode();

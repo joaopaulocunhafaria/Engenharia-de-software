@@ -121,11 +121,15 @@ public class CarrinhoController {
 
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<?> deleteById(@PathVariable String userId, @RequestBody AuthenticationDTO req) {
+    public ResponseEntity<?> deleteById(@PathVariable String userId ) {
         try {
             
-
-            carrinhoService.deleteById(userId);
+            List<Carrinho> carrinhos = carrinhoService.findAll();
+            for (Carrinho carrinho : carrinhos) {
+                if (userId.equals(carrinho.getUserId())) {
+                    carrinhoService.deleteById(carrinho.getId());
+                }
+            }
 
             return ResponseEntity.ok().body("Carrinho deletado com sucesso.");
         } catch (FeignException e) {
@@ -136,8 +140,7 @@ public class CarrinhoController {
             return ResponseEntity.badRequest().body("Erro ao deletar o carrinho: " + e.getMessage());
         }
     }
-
-    @DeleteMapping("/id/{carrinhoId}")
+ 
 
 
     @GetMapping("/user/{userId}")

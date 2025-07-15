@@ -50,6 +50,6 @@ export class CarrinhoService {
     return this.http.post<CarrinhoItem>(`${this.apiroute}`, payload );
   }
   finalizarCompra(userId: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiroute}/clear/${userId}`);
+    return this.http.delete<any>(`${this.apiroute}/${userId}`);
   }
 }

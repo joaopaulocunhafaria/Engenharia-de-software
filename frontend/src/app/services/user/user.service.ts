@@ -55,11 +55,9 @@ export class UserService {
     name: string;
     email: string;
     password: string;
-  }): Observable<any> {
-    const token = this.getToken();
-    const headers = { Authorization: `Bearer ${token}` };
+  }): Observable<any> { 
 
-    return this.http.post<any>(userApi + '/users', user, { headers }).pipe(
+    return this.http.post<any>(userApi + '/users', user ).pipe(
       map((response) => {
         return response;
       }),
