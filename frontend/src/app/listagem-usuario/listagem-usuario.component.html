@@ -40,11 +40,13 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let user of users">
-                        <td>{{ user.nome }}</td>
+                        <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
                         <td>
-                            <select [(ngModel)]="user.cargo">
-                                <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                            <select [(ngModel)]="user.role">
+                                <option *ngFor="let role of roles" [value]="role">
+                                  {{ role === 'ADMIN' ? 'administrador' : role === 'SELLER' ? 'vendedor' : role === 'USER' ? 'usuario' : role }}
+                                </option>
                             </select>
                         </td>
                         <td class="actions">

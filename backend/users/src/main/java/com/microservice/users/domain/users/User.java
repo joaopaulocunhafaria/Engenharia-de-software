@@ -59,11 +59,12 @@ public class User implements UserDetails {
         return email;
     }
 
-    public User(String name, String email, String password, UserRole role) {
+    public User(String name, String email, String password, UserRole role, String endereco) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.endereco = endereco;
     }
 
 }

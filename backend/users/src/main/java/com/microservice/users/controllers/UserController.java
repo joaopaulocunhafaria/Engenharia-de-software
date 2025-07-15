@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.microservice.users.domain.Dto.RegisterDto;
 import com.microservice.users.domain.users.User;
+import com.microservice.users.domain.users.UserRole;
 import com.microservice.users.services.UserService;
 
 @RestController
@@ -43,7 +44,7 @@ public class UserController {
         try {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String encodedPassword = encoder.encode(userDto.password());
-            User user = new User(userDto.name(), userDto.email(), encodedPassword, userDto.role());
+            User user = new User(userDto.name(), userDto.email(), encodedPassword, userDto.role(), userDto.endereco());
             User savedUser = userService.insert(user);
             return ResponseEntity.ok().body(Map.of("message", "User created successfully with ID: " + savedUser.getName()));
         } catch (Exception e) {
@@ -56,13 +57,31 @@ public class UserController {
         try {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String encodedPassword = encoder.encode(userDto.password());
-            User updatedUser = new User(userDto.name(), userDto.email(), encodedPassword, userDto.role());
+            User updatedUser = new User(userDto.name(), userDto.email(), encodedPassword, userDto.role(), userDto.endereco());
             User savedUser = userService.update(id, updatedUser);
             return ResponseEntity.ok("User updated successfully: " + savedUser.getName());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error updating user: " + e.getMessage());
         }
     }
+
+     @PutMapping("/role/{id}")
+    public ResponseEntity<?> updateRole(@PathVariable String id, @RequestBody String role) throws Exception {
+        try { 
+            UserRole userRole;
+            try {
+                userRole = UserRole.valueOf(role.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.badRequest().body("Invalid role provided.");
+            }
+           User savedUser =  userService.updateRole(id, userRole);
+          
+            return ResponseEntity.ok("User updated successfully: " + savedUser.getName());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error updating user: " + e.getMessage());
+        }
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable String id) throws Exception {

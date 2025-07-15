@@ -67,7 +67,7 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().body("Usuario já cadastrado!");
 
         String encriptedString = new BCryptPasswordEncoder().encode(registerDto.password());
-        User newUser = new User(registerDto.name(), registerDto.email(), encriptedString, registerDto.role());
+        User newUser = new User(registerDto.name(), registerDto.email(), encriptedString, registerDto.role(), registerDto.endereco());
 
         this.userRepository.save(newUser);
 
